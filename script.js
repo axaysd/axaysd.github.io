@@ -1,4 +1,4 @@
-// script.js
+/* // script.js
 document.addEventListener('DOMContentLoaded', function() {
   fetchQuestion();
 });
@@ -14,4 +14,4 @@ async function fetchQuestion() {
   } catch (error) {
     console.error('There has been a problem with your fetch operation::', error);
   }
-}
+} */
