@@ -17,64 +17,50 @@ body, html {
 
 .container h1 {
   color: white;
-  margin-bottom: 30px; /* Adjusted space below the title */
+  margin-bottom: 30px;
 }
 
-.toggle-switch {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px; /* Adjusted space between the switches */
-  color: white;
+.toggle-container {
+  margin-bottom: 20px;
 }
 
-.toggle-switch label {
-  margin-right: 10px;
-}
-
-.toggle-input {
+.toggle {
   display: none;
 }
 
-.toggle-label {
-  position: relative;
+.toggle + .toggle-btn {
   display: inline-block;
-  width: 40px; /* Reduced width for smaller toggle */
-  height: 20px; /* Reduced height for smaller toggle */
-  background-color: #ccc;
-  border-radius: 20px; /* Adjusted for the smaller toggle */
-  margin: 0;
+  padding: 10px 20px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  background-color: #ccc;
+  color: black;
+  text-align: center;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
-.toggle-label::after {
-  content: '';
-  position: absolute;
-  left: 2px; /* Adjusted for the smaller toggle */
-  top: 2px; /* Adjusted for the smaller toggle */
-  width: 16px; /* Reduced size for the switch circle */
-  height: 16px; /* Reduced size for the switch circle */
-  background-color: white;
-  border-radius: 50%;
-  transition: 0.2s;
-}
-
-.toggle-input:checked + .toggle-label {
+.toggle:checked + .toggle-btn {
   background-color: #4CAF50;
 }
 
-.toggle-input:checked + .toggle-label::after {
-  transform: translateX(20px); /* Adjusted for the smaller toggle */
+.toggle:checked + .toggle-btn:after {
+  content: 'ON';
+  padding-left: 10px;
+}
+
+.toggle:not(:checked) + .toggle-btn:after {
+  content: 'OFF';
+  padding-left: 10px;
 }
 
 #start-button {
   background-color: yellow;
   border: none;
   color: black;
-  padding: 10px 20px; /* Adjusted padding for the button */
+  padding: 15px 32px;
   font-size: 16px;
   cursor: pointer;
-  margin-top: 20px; /* Adjusted space above the button */
+  margin-top: 20px;
   transition: background-color 0.2s, transform 0.1s;
 }
 
