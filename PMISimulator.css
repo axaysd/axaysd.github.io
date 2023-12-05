@@ -3,16 +3,13 @@ body, html {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  box-sizing: border-box;
+  text-align: center;
 }
 
 .container h1 {
@@ -21,36 +18,48 @@ body, html {
 }
 
 .toggle-container {
-  margin-bottom: 20px;
+  margin: 20px;
 }
 
-.toggle {
+.toggle-checkbox {
   display: none;
 }
 
-.toggle + .toggle-btn {
+.toggle-checkbox:checked + .toggle-label .toggle-inner {
+  background-color: blue;
+}
+
+.toggle-checkbox:checked + .toggle-label .toggle-switch {
+  right: 0;
+}
+
+.toggle-label {
+  position: relative;
   display: inline-block;
-  padding: 10px 20px;
-  cursor: pointer;
-  background-color: #ccc;
-  color: black;
-  text-align: center;
-  border-radius: 5px;
+  width: 50px; /* Width of the entire toggle */
+  height: 25px; /* Height of the entire toggle */
+}
+
+.toggle-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 50%; /* Starts from the middle to the right */
+  background-color: grey;
+  border-radius: 15px;
   transition: background-color 0.3s;
 }
 
-.toggle:checked + .toggle-btn {
-  background-color: #4CAF50;
-}
-
-.toggle:checked + .toggle-btn:after {
-  content: 'ON';
-  padding-left: 10px;
-}
-
-.toggle:not(:checked) + .toggle-btn:after {
-  content: 'OFF';
-  padding-left: 10px;
+.toggle-switch {
+  position: absolute;
+  top: 2px; /* Slightly smaller to create a border effect */
+  right: 50%; /* Start from the middle to the left */
+  bottom: 2px; /* Slightly smaller to create a border effect */
+  left: 2px; /* Space for the border */
+  background-color: white;
+  border-radius: 50%;
+  transition: right 0.3s;
 }
 
 #start-button {
@@ -60,11 +69,9 @@ body, html {
   padding: 15px 32px;
   font-size: 16px;
   cursor: pointer;
-  margin-top: 20px;
-  transition: background-color 0.2s, transform 0.1s;
+  margin-top: 30px;
 }
 
 #start-button:hover {
   background-color: #ffeb3b;
-  transform: translateY(-2px);
 }
