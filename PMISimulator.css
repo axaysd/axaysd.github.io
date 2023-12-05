@@ -1,8 +1,8 @@
 body, html {
   height: 100%;
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: red;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #D32F2F; /* Richer shade of red for background */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,68 +10,87 @@ body, html {
 
 .container {
   text-align: center;
+  color: white;
+  max-width: 320px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
 .container h1 {
-  color: white;
-  margin-bottom: 30px;
+  font-size: 2em;
+  margin-bottom: 40px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
 }
 
 .toggle-container {
-  margin: 20px;
-}
-
-.toggle-checkbox {
-  display: none;
-}
-
-.toggle-checkbox:checked + .toggle-label .toggle-inner {
-  background-color: blue;
-}
-
-.toggle-checkbox:checked + .toggle-label .toggle-switch {
-  right: 0;
+  display: block;
+  margin-bottom: 20px;
+  background: #F5F5F5;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .toggle-label {
-  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  color: #333; /* Dark text for better contrast */
+  font-weight: bold;
+}
+
+.toggle-label .toggle-checkbox {
+  display: none;
+}
+
+.toggle-label .toggle-switch {
+  margin-left: auto; /* Aligns the toggle to the right */
   display: inline-block;
-  width: 50px; /* Width of the entire toggle */
-  height: 25px; /* Height of the entire toggle */
+  width: 60px; /* Slightly larger for easier interaction */
+  height: 30px;
+  background: #BDBDBD; /* Neutral grey for the switch background */
+  border-radius: 30px;
+  position: relative;
+  transition: background 0.3s ease;
 }
 
-.toggle-inner {
+.toggle-label .toggle-switch::before {
+  content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 50%; /* Starts from the middle to the right */
-  background-color: grey;
-  border-radius: 15px;
-  transition: background-color 0.3s;
-}
-
-.toggle-switch {
-  position: absolute;
-  top: 2px; /* Slightly smaller to create a border effect */
-  right: 50%; /* Start from the middle to the left */
-  bottom: 2px; /* Slightly smaller to create a border effect */
-  left: 2px; /* Space for the border */
-  background-color: white;
+  top: 4px;
+  left: 4px;
+  width: 22px;
+  height: 22px;
+  background: white;
   border-radius: 50%;
-  transition: right 0.3s;
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.toggle-label .toggle-checkbox:checked + .toggle-switch {
+  background: #4CAF50; /* Pleasing green for the "ON" state */
+}
+
+.toggle-label .toggle-checkbox:checked + .toggle-switch::before {
+  transform: translateX(30px); /* Adjusted for the larger switch */
 }
 
 #start-button {
-  background-color: yellow;
+  background-color: #FFEB3B; /* Vibrant yellow for the button */
   border: none;
-  color: black;
+  color: #333; /* Dark text for better contrast */
   padding: 15px 32px;
   font-size: 16px;
   cursor: pointer;
   margin-top: 30px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: box-shadow 0.3s ease, transform 0.1s ease;
 }
 
 #start-button:hover {
-  background-color: #ffeb3b;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  transform: translateY(-2px);
 }
