@@ -12,6 +12,6 @@ async function fetchQuestion() {
     const questionBox = document.getElementById('question-box');
     questionBox.innerHTML = `<p>Question::: ${data.question}</p>`;
   } catch (error) {
-    console.error('There has been a problem with your fetch operation:', error);
+    console.error('There has been a problem with your fetch operation::', error);
   }
 }
