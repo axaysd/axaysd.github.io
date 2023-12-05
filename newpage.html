@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>New Page</title>
-    <!-- Add any additional head elements here -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PM Interview Simulator</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>This is a New Page</h1>
-    <!-- Add additional page content here -->
+<div class="container">
+  <h1>Simulate PM interview</h1>
+  <label for="guided-mode">Guided mode:</label>
+  <input type="range" id="guided-mode" min="0" max="1">
+  <label for="timed-mode">Timed mode:</label>
+  <input type="range" id="timed-mode" min="0" max="1">
+  <button id="start-button">Start</button>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
