@@ -1,9 +1,30 @@
-/* ... other styles ... */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: red;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.container h1 {
+  color: white;
+  margin-bottom: 50px; /* Increased space below the title */
+}
 
 .toggle-switch {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 30px; /* Increased space between the switches and the button */
+  color: white;
 }
 
 .toggle-switch label {
@@ -46,4 +67,18 @@
   transform: translateX(26px);
 }
 
-/* ... other styles ... */
+#start-button {
+  background-color: yellow;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 30px; /* Increased space above the button */
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+#start-button:hover {
+  background-color: #ffeb3b; /* Slightly lighter yellow on hover */
+  transform: translateY(-2px); /* Small lift effect on hover */
+}
