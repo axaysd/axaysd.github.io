@@ -1,6 +1,6 @@
-document.getElementById('start-button').addEventListener('click', function() {
-  alert('Starting the simulation!');
-  // Here you can add more JavaScript to handle what happens when the simulation starts
+// script.js
+document.addEventListener('DOMContentLoaded', function() {
+  fetchQuestion();
 });
 
 async function fetchQuestion() {
@@ -9,10 +9,9 @@ async function fetchQuestion() {
     if (!response.ok) throw new Error('Network response was not ok!');
 
     const data = await response.json();
-    document.getElementById('question-box').textContent = data.question;
+    const questionBox = document.getElementById('question-box');
+    questionBox.innerHTML = `<p>Question: ${data.question}</p>`;
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error);
   }
 }
-
-fetchQuestion();
