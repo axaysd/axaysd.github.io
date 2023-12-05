@@ -10,7 +10,7 @@ async function fetchQuestion() {
 
     const data = await response.json();
     const questionBox = document.getElementById('question-box');
-    questionBox.innerHTML = `<p>Question::: ${data.question}</p>`;
+    questionBox.innerHTML = `<p>Question::: ${data} ${data.question}</p>`;
   } catch (error) {
     console.error('There has been a problem with your fetch operation::', error);
   }
