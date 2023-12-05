@@ -17,13 +17,13 @@ body, html {
 
 .container h1 {
   color: white;
-  margin-bottom: 50px; /* Increased space below the title */
+  margin-bottom: 30px; /* Adjusted space below the title */
 }
 
 .toggle-switch {
   display: flex;
   align-items: center;
-  margin-bottom: 30px; /* Increased space between the switches and the button */
+  margin-bottom: 20px; /* Adjusted space between the switches */
   color: white;
 }
 
@@ -38,10 +38,10 @@ body, html {
 .toggle-label {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  width: 40px; /* Reduced width for smaller toggle */
+  height: 20px; /* Reduced height for smaller toggle */
   background-color: #ccc;
-  border-radius: 34px;
+  border-radius: 20px; /* Adjusted for the smaller toggle */
   margin: 0;
   cursor: pointer;
   transition: background-color 0.2s;
@@ -50,10 +50,10 @@ body, html {
 .toggle-label::after {
   content: '';
   position: absolute;
-  left: 4px;
-  top: 4px;
-  width: 26px;
-  height: 26px;
+  left: 2px; /* Adjusted for the smaller toggle */
+  top: 2px; /* Adjusted for the smaller toggle */
+  width: 16px; /* Reduced size for the switch circle */
+  height: 16px; /* Reduced size for the switch circle */
   background-color: white;
   border-radius: 50%;
   transition: 0.2s;
@@ -64,21 +64,21 @@ body, html {
 }
 
 .toggle-input:checked + .toggle-label::after {
-  transform: translateX(26px);
+  transform: translateX(20px); /* Adjusted for the smaller toggle */
 }
 
 #start-button {
   background-color: yellow;
   border: none;
   color: black;
-  padding: 15px 32px;
+  padding: 10px 20px; /* Adjusted padding for the button */
   font-size: 16px;
   cursor: pointer;
-  margin-top: 30px; /* Increased space above the button */
+  margin-top: 20px; /* Adjusted space above the button */
   transition: background-color 0.2s, transform 0.1s;
 }
 
 #start-button:hover {
-  background-color: #ffeb3b; /* Slightly lighter yellow on hover */
-  transform: translateY(-2px); /* Small lift effect on hover */
+  background-color: #ffeb3b;
+  transform: translateY(-2px);
 }
