@@ -174,6 +174,12 @@
     .header-content .location {
       font-size: 0.9rem;
     }
+
+    @media (max-width: 768px) {
+    .right-indented {
+        margin-left: 10px; /* Smaller indent for mobile devices */
+        }
+    }
   
     .social-icons a {
       font-size: 1.2rem;
