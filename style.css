@@ -105,6 +105,12 @@
     font-weight: 600;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
+
+  .right-indented {
+      margin-left: 20px; /* Adjust this value to increase or decrease the indentation */
+      /* If you want to align the text to the right, you can use this instead */
+      /* text-align: right; */
+  }
   
   #portfolio .project {
     background: #eceff1; /* Light blue-grey */
