@@ -3,34 +3,37 @@
 <head>
     <title>Resume</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.worker.min.js"></script>
 </head>
 <body>
     <canvas id="pdf-canvas"></canvas>
     <script>
-      if (pdfjsLib && pdfjsLib.getDocument) {
-        pdfjsLib.GlobalWorkerOptions.workerSrc = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.worker.min.js';
+    document.addEventListener('DOMContentLoaded', function() {
+        if (pdfjsLib && pdfjsLib.getDocument) {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.worker.min.js';
 
-        var pdfURL = 'https://raw.githack.com/axaysd/axaysd.github.io/main/Akshay_Danthi_resume_DS4.pdf';
+            var pdfURL = 'https://raw.githack.com/axaysd/axaysd.github.io/main/Akshay_Danthi_resume_DS4.pdf';
 
-        pdfjsLib.getDocument(pdfURL).promise.then(function(pdfDoc) {
-          pdfDoc.getPage(1).then(function(page) {
-            var canvas = document.getElementById('pdf-canvas');
-            var context = canvas.getContext('2d');
-            var viewport = page.getViewport({scale: 1.0});
+            pdfjsLib.getDocument(pdfURL).promise.then(function(pdfDoc) {
+                pdfDoc.getPage(1).then(function(page) {
+                    var canvas = document.getElementById('pdf-canvas');
+                    var context = canvas.getContext('2d');
+                    var viewport = page.getViewport({scale: 1.0});
 
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
 
-            var renderContext = {
-              canvasContext: context,
-              viewport: viewport
-            };
-            page.render(renderContext);
-          });
-        });
-      } else {
-        console.error("PDF.js is not loaded");
-      }
+                    var renderContext = {
+                        canvasContext: context,
+                        viewport: viewport
+                    };
+                    page.render(renderContext);
+                });
+            });
+        } else {
+            console.error("PDF.js is not loaded");
+        }
+    });
     </script>
 </body>
 </html>
