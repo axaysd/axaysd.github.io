@@ -8,7 +8,7 @@
         pdfjsLib.GlobalWorkerOptions.workerSrc = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.worker.min.js';
     
         // Specify the URL of your PDF file here
-        var pdfURL = 'YOUR_PDF_URL_HERE';
+        var pdfURL = '/Akshay_Danthi_resume_DS4.pdf';
     
         pdfjsLib.getDocument(pdfURL).promise.then(function(pdfDoc) {
           pdfDoc.getPage(1).then(function(page) {
