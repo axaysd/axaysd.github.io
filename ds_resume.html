@@ -12,7 +12,7 @@
         if (pdfjsLib && pdfjsLib.getDocument) {
             pdfjsLib.GlobalWorkerOptions.workerSrc = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.worker.min.js';
 
-            var pdfURL = 'https://raw.githack.com/axaysd/axaysd.github.io/main/Akshay_Danthi_resume_DS4.pdf';
+            var pdfURL = 'https://akshays.me/Akshay_Danthi_resume_DS4.pdf';
 
             pdfjsLib.getDocument(pdfURL).promise.then(function(pdfDoc) {
                 pdfDoc.getPage(1).then(function(page) {
