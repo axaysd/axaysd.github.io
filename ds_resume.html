@@ -1,57 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Resume</title>
-    <style>
-        /* Container styling */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        /* Canvas styling */
-        #pdf-canvas {
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow around the canvas */
-            max-width: 100%;
-            max-height: 100vh;
-        }
-    </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.worker.min.js"></script>
+    <title>My Resume</title>
 </head>
 <body>
-    <canvas id="pdf-canvas"></canvas>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        if (pdfjsLib && pdfjsLib.getDocument) {
-            pdfjsLib.GlobalWorkerOptions.workerSrc = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.worker.min.js';
-
-            var pdfURL = 'https://akshays.me/Akshay_Danthi_resume_DS4.pdf';
-
-            pdfjsLib.getDocument(pdfURL).promise.then(function(pdfDoc) {
-                pdfDoc.getPage(1).then(function(page) {
-                    var canvas = document.getElementById('pdf-canvas');
-                    var context = canvas.getContext('2d');
-                    var scale = 1.5; // Adjust scale as needed for clarity
-                    var viewport = page.getViewport({scale: scale});
-
-                    canvas.height = viewport.height;
-                    canvas.width = viewport.width;
-
-                    var renderContext = {
-                        canvasContext: context,
-                        viewport: viewport
-                    };
-                    page.render(renderContext);
-                });
-            });
-        } else {
-            console.error("PDF.js is not loaded");
-        }
-    });
-    </script>
+    <iframe src="https://docs.google.com/viewer?url=https://akshays.me/Akshay_Danthi_resume_DS4.pdf&embedded=true" style="width:600px; height:500px;" frameborder="0"></iframe>
 </body>
 </html>
