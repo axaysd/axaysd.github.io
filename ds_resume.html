@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Resume</title>
+    <title>Resume</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.min.js"></script>
+</head>
+<body>
+    <canvas id="pdf-canvas"></canvas>
     <script>
-      // Ensure the PDF.js library has loaded
       if (pdfjsLib && pdfjsLib.getDocument) {
         pdfjsLib.GlobalWorkerOptions.workerSrc = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.worker.min.js';
-    
-        // Specify the URL of your PDF file here
-        var pdfURL = '/Akshay_Danthi_resume_DS4.pdf';
-    
+
+        var pdfURL = 'https://raw.githack.com/axaysd/axaysd.github.io/main/Akshay_Danthi_resume_DS4.pdf';
+
         pdfjsLib.getDocument(pdfURL).promise.then(function(pdfDoc) {
           pdfDoc.getPage(1).then(function(page) {
             var canvas = document.getElementById('pdf-canvas');
             var context = canvas.getContext('2d');
-            var viewport = page.getViewport({scale: 1});
-    
+            var viewport = page.getViewport({scale: 1.0});
+
             canvas.height = viewport.height;
             canvas.width = viewport.width;
-    
+
             var renderContext = {
               canvasContext: context,
               viewport: viewport
@@ -30,8 +32,5 @@
         console.error("PDF.js is not loaded");
       }
     </script>
-</head>
-<body>
-    <canvas id="pdf-canvas"></canvas>
 </body>
 </html>
