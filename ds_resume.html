@@ -2,7 +2,34 @@
 <html>
 <head>
     <title>My Resume</title>
-    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.7.570/build/pdf.js"></script>
+    <script>
+      // Ensure the PDF.js library has loaded
+      if (pdfjsLib && pdfjsLib.getDocument) {
+        pdfjsLib.GlobalWorkerOptions.workerSrc = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.worker.min.js';
+    
+        // Specify the URL of your PDF file here
+        var pdfURL = 'YOUR_PDF_URL_HERE';
+    
+        pdfjsLib.getDocument(pdfURL).promise.then(function(pdfDoc) {
+          pdfDoc.getPage(1).then(function(page) {
+            var canvas = document.getElementById('pdf-canvas');
+            var context = canvas.getContext('2d');
+            var viewport = page.getViewport({scale: 1});
+    
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+    
+            var renderContext = {
+              canvasContext: context,
+              viewport: viewport
+            };
+            page.render(renderContext);
+          });
+        });
+      } else {
+        console.error("PDF.js is not loaded");
+      }
+    </script>
 </head>
 <body>
     <canvas id="pdf-canvas"></canvas>
