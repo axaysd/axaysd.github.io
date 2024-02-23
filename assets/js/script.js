@@ -157,3 +157,33 @@ for (let i = 0; i < navigationLinks.length; i++) {
 
   });
 }
+
+// Assuming each service item has a class "service-item" and is wrapped in a clickable element
+const serviceItems = document.querySelectorAll('.service-item');
+
+serviceItems.forEach(item => {
+    item.addEventListener('click', () => {
+        // Deactivate all pages
+        pages.forEach(page => {
+            page.classList.remove('active');
+        });
+
+        // Deactivate all navigation links
+        navigationLinks.forEach(navLink => {
+            navLink.classList.remove('active');
+        });
+
+        // Activate the Portfolio page
+        const portfolioPage = document.querySelector('[data-page="portfolio"]');
+        portfolioPage.classList.add('active');
+
+        // Activate the Portfolio navigation link
+        const portfolioNavLink = document.querySelector('button[data-nav-link="Portfolio"]');
+        if (portfolioNavLink) {
+            portfolioNavLink.classList.add('active');
+        }
+
+        // Scroll to the top of the page or to the portfolio section
+        window.scrollTo(0, 0);
+    });
+});
