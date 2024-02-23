@@ -531,6 +531,18 @@ main {
   z-index: 1;
 }
 
+.service-list {
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+  list-style: none;
+}
+
+.service-item {
+  flex-basis: calc(33.333% - 20px); /* Adjust the 20px if you have specific margins in mind */
+  box-sizing: border-box;
+}
+
 .service-item::before {
   content: "";
   position: absolute;
