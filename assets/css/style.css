@@ -1829,6 +1829,13 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   article { min-height: 100%; }
 
+  .no-projects-message {
+    text-align: center;
+    color: #888;
+    font-size: 18px;
+    margin: 20px 0;
+  }
+
 
 
   /**
