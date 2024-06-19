@@ -197,15 +197,15 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   productManagementButton.addEventListener("click", function() {
-    filterProjects("product management");
+    filterFunc("product management");
   });
 
   aiButton.addEventListener("click", function() {
-    filterProjects("ai");
+    filterFunc("ai");
   });
 
   dataAnalyticsButton.addEventListener("click", function() {
-    filterProjects("data analytics");
+    filterFunc("data analytics");
   });
 
   // Initially hide all projects
