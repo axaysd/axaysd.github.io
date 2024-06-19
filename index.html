@@ -15,174 +15,105 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Akshay Danthi - Personal Portfolio</title>
 
-  <!--
-    - favicon
-  -->
+  <!-- favicon -->
   <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
 
-  <!--
-    - custom css link
-  -->
+  <!-- custom css link -->
   <link rel="stylesheet" href="./assets/css/style.css">
 
-  <!--
-    - google font link
-  -->
+  <!-- google font link -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!--
-    - #MAIN
-  -->
-
+  <!-- MAIN -->
   <main>
 
-    <!--
-      - #SIDEBAR
-    -->
-
+    <!-- SIDEBAR -->
     <aside class="sidebar" data-sidebar>
 
       <div class="sidebar-info">
-
         <figure class="avatar-box">
           <img src="./assets/images/my-avatar.png" alt="Richard hanrick" width="80">
         </figure>
-
         <div class="info-content">
           <h1 class="name" title="Akshay Danthi">Akshay Danthi</h1>
-
           <p class="title"></p>
         </div>
-
         <button class="info_more-btn" data-sidebar-btn>
           <span>Show Contacts</span>
-
           <ion-icon name="chevron-down"></ion-icon>
         </button>
-
       </div>
 
       <div class="sidebar-info_more">
-
         <div class="separator"></div>
-
         <ul class="contacts-list">
-
           <li class="contact-item">
-
             <div class="icon-box">
               <ion-icon name="mail-outline"></ion-icon>
             </div>
-
             <div class="contact-info">
               <p class="contact-title">Email</p>
-
               <a href="mailto:axaysd@gmail.com" class="contact-link">axaysd@gmail.com</a>
             </div>
-
           </li>
-
           <li class="contact-item">
-
             <div class="icon-box">
               <ion-icon name="phone-portrait-outline"></ion-icon>
             </div>
-
             <div class="contact-info">
               <p class="contact-title">Phone</p>
-
               <a href="tel:+16284682958" class="contact-link">+1 (628) 468-2958</a>
             </div>
-
           </li>
-
           <li class="contact-item">
-
             <div class="icon-box">
               <ion-icon name="location-outline"></ion-icon>
             </div>
-
             <div class="contact-info">
               <p class="contact-title">Location</p>
-
               <address>San Francisco, California, USA</address>
             </div>
-
           </li>
-
         </ul>
-
         <div class="separator"></div>
-
       </div>
-
     </aside>
 
-    <!--
-      - #main-content
-    -->
-
+    <!-- main-content -->
     <div class="main-content">
 
-      <!--
-        - #NAVBAR
-      -->
-
+      <!-- NAVBAR -->
       <nav class="navbar">
-
         <ul class="navbar-list">
-
           <li class="navbar-item">
-            <button class="navbar-link  active" data-nav-link>About</button>
+            <button class="navbar-link active" data-nav-link>About</button>
           </li>
-
           <li class="navbar-item">
             <button class="navbar-link" data-nav-link>Resume</button>
           </li>
-
           <li class="navbar-item">
             <button class="navbar-link" data-nav-link>Portfolio</button>
           </li>
-<!--
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Contact</button>
-          </li>
--->
         </ul>
-
       </nav>
 
-
-
-
-
-      <!--
-        - #ABOUT
-      -->
-
-      <article class="about  active" data-page="about">
-
+      <!-- ABOUT -->
+      <article class="about active" data-page="about">
         <header>
           <h2 class="h2 article-title">About me</h2>
         </header>
-
         <section class="about-text">
           <p>
             I have 5.5 years of work experience spanning Data Analytics, Product Management, Business Analysis and Software Development.<br>
             I specialize in the strategic integration of Analytics, Product, and AI/ML, driving innovation and delivering data-driven solutions that enhance product performance and customer experience.
           </p>
-
         </section>
 
-
-        <!--
-          - service
-        -->
-
+        <!-- service -->
         <section class="service">
           <h3 class="h3 service-title">My Portfolio</h3>
           <ul class="service-list">
@@ -220,509 +151,305 @@
             </li>
           </ul>
         </section>
-        
+
         <div class="modal-container" data-modal-container>
-
           <div class="overlay" data-overlay></div>
-
           <section class="testimonials-modal">
-
             <button class="modal-close-btn" data-modal-close-btn>
               <ion-icon name="close-outline"></ion-icon>
             </button>
-
           </section>
-
         </div>
-
       </article>
 
-      <!--
-        - #RESUME
-      -->
-
+      <!-- RESUME -->
       <article class="resume" data-page="resume">
-
         <header>
           <h2 class="h2 article-title">Resume</h2>
         </header>
-
         <section class="timeline">
-
           <div class="title-wrapper">
             <div class="icon-box">
               <ion-icon name="briefcase"></ion-icon>
             </div>
-
             <h3 class="h3">Work Experience</h3>
           </div>
-
           <ol class="timeline-list">
-
             <li class="timeline-item">
-
               <h4 class="h4 timeline-item-title">Data Analyst @ Golden Gate University</h4>
-
               <span>Dec 2023 — Present</span>
-
               <p class="timeline-text">
                 • Developing and deploying dynamic reports and interactive dashboards using Pandas, SQL, and Tableau, enabling datadriven decision making in real-time for senior leadership.<br>
                 • Designed and implemented predictive models using Python and scikit-learn, significantly improving strategic planning by forecasting trends and outcomes with high accuracy, enhancing overall performance and outcomes.
               </p>
-
             </li>
-
             <li class="timeline-item">
-
               <h4 class="h4 timeline-item-title">Product Manager @ Mastercard (via Wipro)</h4>
-
               <span>March 2022 — August 2023</span>
-
               <p class="timeline-text">
                 • Managed 2 projects for Mastercard in the role of Product Manager-Technical<br>
                 • Successfully onboarded issuers/affiliates into the new cloud-native, multi-API product at an enhanced rate of over 50 per week, marking a significant improvement from the initial rate of 10 per week.<br>
                 • Elicited requirements from 15+ international stakeholders, leading a 9-member tech team to implement changes, achieving an 85% CSAT score.
               </p>
-
             </li>
-
             <li class="timeline-item">
-
               <h4 class="h4 timeline-item-title">Business Analyst @ HSBC (via Infosys)</h4>
-
               <span>November 2019 — March 2022</span>
-
               <p class="timeline-text">
                 • Handled 2 projects (Cloud migration of the Payments Engine) for HSBC as an Agile BA.<br>
                 • Drove the implementation of HSBC Saudi Arabia's Payment Processing platform to comply with ISO20022 SWIFT regulations.
               </p>
-
             </li>
-
             <li class="timeline-item">
-
               <h4 class="h4 timeline-item-title">Software Developer @ Lloyds Banking Group (via Virtusa)</h4>
-
               <span>November 2017 — November 2019</span>
-
               <p class="timeline-text">
                 • Used Java, Oracle SQL to process High Volume, High Variety SWIFT Payments data.<br>
               </p>
-
             </li>
-
           </ol>
-
         </section>
-
         <section class="timeline">
-
           <div class="title-wrapper">
             <div class="icon-box">
               <ion-icon name="book"></ion-icon>
             </div>
-
             <h3 class="h3">Education</h3>
           </div>
-
           <ol class="timeline-list">
-
             <li class="timeline-item">
-
               <h4 class="h4 timeline-item-title">MS in Business Analytics @ Golden Gate University, SF</h4>
-
               <span>September 2023 - Present</span>
-
               <p class="timeline-text">
                 <b><u>Relevant Coursework</u></b>: Enterprise Performance Management and Metrics, Big Data Ecosystems, Business Intelligence, Managing Data Structures, Advanced Statistical Analysis with Python & R, ML for Predictive Analytics, Visualization & Communication.
               </p>
-
             </li>
-
             <li class="timeline-item">
-
               <h4 class="h4 timeline-item-title">B.E. in Computer Science & Engineering @ Anna University</h4>
-
               <span>August 2013 - May 2017</span>
-
-              <p class="timeline-text">
-                
-              </p>
-
+              <p class="timeline-text"></p>
             </li>
-
           </ol>
-
         </section>
-
-<!--
-        <section class="skill">
-
-          <h3 class="h3 skills-title">My skills</h3>
-
-          <div class="skills-container">
-            <span class="skill">Requirements Elicitation</span>
-            <span class="skill">Prioritization</span>
-            <span class="skill">Metrics tracking</span>
-            <span class="skill">Customer Segmentation</span>
-            <span class="skill">Machine Learning: Regression, Classification & Clustering</span>
-            <span class="skill">Data Science: Data Cleaning, EDA, Data Visualization, Statistical Modeling</span>
-            <span class="skill">A/B and multivariate testing</span>
-            <span class="skill">Effective Communication</span>
-            <span class="skill">Creative Problem Solving</span>
-            <span class="skill">Stakeholder Management</span>
-            <span class="skill">Figma</span>
-            <span class="skill">SQL</span>
-            <span class="skill">MS Excel</span>
-            <span class="skill">Python</span>
-            <span class="skill">Tableau</span>
-            <span class="skill">R</span>
-            <span class="skill">Java</span>
-          </div>
-
-        </section>
-      -->
       </article>
 
-      <!--
-        - #PORTFOLIO
-      -->
-
+      <!-- PORTFOLIO -->
       <article class="portfolio" data-page="portfolio">
-
         <header>
           <h2 class="h2 article-title">Portfolio</h2>
         </header>
-
         <section class="projects">
 
+          <!-- Filter buttons -->
           <ul class="filter-list">
-
             <li class="filter-item">
-              <button data-filter-btn>data analytics</button>
+              <button id="show-all">Show All</button>
             </li>
-
             <li class="filter-item">
-              <button data-filter-btn>product management</button>
+              <button id="data-analytics">Data Analytics</button>
             </li>
-
             <li class="filter-item">
-              <button data-filter-btn>ai</button>
+              <button id="product-management">Product Management</button>
             </li>
-
+            <li class="filter-item">
+              <button id="ai">AI</button>
+            </li>
           </ul>
 
           <div class="filter-select-box">
-
             <button class="filter-select" data-select>
-
               <div class="select-value" data-selecct-value>Select category</div>
-
               <div class="select-icon">
                 <ion-icon name="chevron-down"></ion-icon>
               </div>
-
             </button>
-
             <ul class="select-list">
-
               <li class="select-item">
                 <button data-select-item>data analytics</button>
               </li>
-
               <li class="select-item">
                 <button data-select-item>product management</button>
               </li>
-
               <li class="select-item">
                 <button data-select-item>ai</button>
               </li>
-
             </ul>
-
           </div>
 
           <ul class="project-list">
-
-            <li class="project-item  active" data-filter-item data-category="data analytics">
+            <li class="project-item active" data-filter-item data-category="data analytics">
               <a href="https://github.com/axaysd/Telecom-Customer-Churn-Analysis">
-
                 <figure class="project-img">
                   <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
-
                   <img src="./assets/images/project-1.jpg" alt="finance" loading="lazy">
                 </figure>
-
                 <h3 class="project-title">Churn Analysis on Telecom customer data</h3>
-
                 <p class="project-category">Python (NumPy, Pandas, scikit-learn)</p>
-
               </a>
             </li>
             
-            <li class="project-item  active" data-filter-item data-category="ai">
+            <li class="project-item active" data-filter-item data-category="ai">
               <a href="https://github.com/axaysd/SpeciesClassificationNN">
-
                 <figure class="project-img">
                   <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
-
                   <img src="./assets/images/evolution.png" alt="species-genes" loading="lazy">
                 </figure>
-
                 <h3 class="project-title">Predicting Hominid Species from their Genetic markers and Physical Traits using a Fully Connected Neural Network</h3>
-
                 <p class="project-category">Python (NumPy, Pandas, scikit-learn), Keras</p>
-
               </a>
             </li>
 
-            <li class="project-item  active" data-filter-item data-category="data analytics">
+            <li class="project-item active" data-filter-item data-category="data analytics">
               <a href="https://github.com/axaysd/California_Housing_Price_Prediction">
-
                 <figure class="project-img">
                   <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
-
                   <img src="./assets/images/project-2.png" alt="orizon" loading="lazy">
                 </figure>
-
                 <h3 class="project-title">California Housing Price Prediction</h3>
-                
                 <p class="project-category">Python (NumPy, Pandas, scikit-learn)</p>
-
               </a>
             </li>
 
-            <li class="project-item  active" data-filter-item data-category="data analytics">
+            <li class="project-item active" data-filter-item data-category="data analytics">
               <a href="https://public.tableau.com/app/profile/akshay.danthi/viz/Cluster_Analysis_17023853801610/e-CommerceCustomerClusterAnalysis">
-
                 <figure class="project-img">
                   <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
-
                   <img src="./assets/images/project-3.png" alt="fundo" loading="lazy">
                 </figure>
-
                 <h3 class="project-title">Cluster Analysis on eCommerce data</h3>
-
                 <p class="project-category">Tableau</p>
-
               </a>
             </li>
 
-            <li class="project-item  active" data-filter-item data-category="data analytics">
+            <li class="project-item active" data-filter-item data-category="data analytics">
               <a href="https://github.com/axaysd/United_Airlines_Baggage_Issues_Analysis">
-
                 <figure class="project-img">
                   <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
-
                   <img src="./assets/images/project-4.png" alt="brawlhalla" loading="lazy">
                 </figure>
-
                 <h3 class="project-title">Sentiment Analysis on United Airlines reviews from AirlineQuality.com</h3>
-
                 <p class="project-category">R (syuzhet, tm, tidyverse, ggplot2)</p>
-
               </a>
             </li>
 
-            <li class="project-item  active" data-filter-item data-category="data analytics">
+            <li class="project-item active" data-filter-item data-category="data analytics">
               <a href="https://github.com/axaysd/SQL-interview-questions-practice">
-
                 <figure class="project-img">
                   <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
-
                   <img src="./assets/images/sql_interview.png" alt="SQL" loading="lazy">
                 </figure>
-
                 <h3 class="project-title">My solutions to SQL interview questions from TryExponent.com and DataInterview.com</h3>
-
                 <p class="project-category">SQL</p>
-
               </a>
             </li>
 
-            <li class="project-item  active" data-filter-item data-category="data analytics">
+            <li class="project-item active" data-filter-item data-category="data analytics">
               <a href="https://github.com/axaysd/Nike-Kaepernick">
-
                 <figure class="project-img">
                   <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
-
                   <img src="./assets/images/project-5.png" alt="dsm." loading="lazy">
                 </figure>
-
                 <h3 class="project-title">Social Media Strategy Analysis on the Nike-Kaepernick controversy</h3>
-
                 <p class="project-category">R (syuzhet, tm, tidyverse, ggplot2)</p>
-
               </a>
             </li>
 
-            <li class="project-item  active" data-filter-item data-category="data analytics">
+            <li class="project-item active" data-filter-item data-category="data analytics">
               <a href="https://github.com/axaysd/Cluster-Analysis-on-Dogfood-customers">
-
                 <figure class="project-img">
                   <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
-
                   <img src="./assets/images/project-6.png" alt="metaspark" loading="lazy">
                 </figure>
-
                 <h3 class="project-title">Cluster Analysis on Dogfood customers</h3>
-
                 <p class="project-category">R</p>
-
               </a>
             </li>
 
-            <li class="project-item  active" data-filter-item data-category="product management">
+            <li class="project-item active" data-filter-item data-category="product management">
               <a href="https://gelatinous-spandex-35a.notion.site/How-I-d-improve-Google-Maps-7a89c605790346f7b82310f03a45b4e4?pvs=4">
-
                 <figure class="project-img">
                   <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
-
                   <img src="./assets/images/project-7.png" alt="summary" loading="lazy">
                 </figure>
-
                 <h3 class="project-title">How I'd improve Google Maps</h3>
-
                 <p class="project-category">Product Improvement</p>
-
               </a>
             </li>
 
-            <li class="project-item  active" data-filter-item data-category="product management">
+            <li class="project-item active" data-filter-item data-category="product management">
               <a href="https://akshays.me/SkillProbe.AI_PRD.pdf">
-
                 <figure class="project-img">
                   <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
-
                   <img src="./assets/images/project-8.png" alt="task manager" loading="lazy">
                 </figure>
-
                 <h3 class="project-title">PRD: SkillProbe.AI: An AI Interview Simulation Product</h3>
-
                 <p class="project-category">PRD</p>
-
               </a>
             </li>
 
-            <li class="project-item  active" data-filter-item data-category="ai">
+            <li class="project-item active" data-filter-item data-category="ai">
               <a href="https://github.com/axaysd/website-chat-1">
-
                 <figure class="project-img">
                   <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
-
                   <img src="./assets/images/project-9.png" alt="arrival" loading="lazy">
                 </figure>
-
                 <h3 class="project-title">WebsiteChat - LLM that enables user to chat and get insights from information from a URL</h3>
-
                 <p class="project-category">RAG, LangChain, ChromaDB Vector DB</p>
-
                 <p class="project-category">
                   <a href="https://axaysd-website-chat.streamlit.app">
                     Live on axaysd-website-chat.streamlit.app
                   </a>
                 </p>
-
               </a>
             </li>
 
-            <li class="project-item  active" data-filter-item data-category="ai">
+            <li class="project-item active" data-filter-item data-category="ai">
               <a href="https://github.com/axaysd/Movie-Recommender-system-and-how-to-resolve-bias-in-Hybrid-Recommender-systems">
-
                 <figure class="project-img">
                   <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
-
                   <img src="./assets/images/project-10.png" alt="implicit" loading="lazy">
                 </figure>
-
                 <h3 class="project-title">Resolving Implicit Selection Bias in Hybrid Recommender Systems</h3>
-
                 <p class="project-category">NumPy, scikit-learn, lightfm</p>
-
               </a>
             </li>
-
           </ul>
-
         </section>
-
       </article>
-
-      <!--
-        - #CONTACT
-      -->
-<!--
-      <article class="contact" data-page="contact">
-
-        <header>
-          <h2 class="h2 article-title">Contact</h2>
-        </header>
-
-        <section class="contact-form">
-
-          <h3 class="h3 form-title">Contact Form</h3>
-
-          <form action="#" class="form" data-form>
-
-            <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
-
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
-            </div>
-
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
-
-            <button class="form-btn" type="submit" disabled data-form-btn>
-              <ion-icon name="paper-plane"></ion-icon>
-              <span>Send Message</span>
-            </button>
-
-          </form>
-
-        </section>
-      -->
-
-      </article>
-
     </div>
-
   </main>
 
-  <!--
-    - custom js link
-  -->
+  <!-- custom js link -->
   <script src="./assets/js/script.js"></script>
 
-  <!--
-    - ionicon link
-  -->
+  <!-- ionicon link -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<co-pilot platform-id="d4b78280-c84c-45cb-a2a9-39976d1bde97" user-id="352b9f7a-eb89-4574-b787-5263bbebe385" chatbot-id="012be872-935c-4849-ae0c-40ed0d550a30" is-local="false" ><a href="https://www.chatsimple.ai/?utm_source=widget&utm_medium=referral">copilot</a></co-pilot> <script src="https://cdn.chatsimple.ai/ai-loader.js" defer></script>
+  <co-pilot platform-id="d4b78280-c84c-45cb-a2a9-39976d1bde97" user-id="352b9f7a-eb89-4574-b787-5263bbebe385" chatbot-id="012be872-935c-4849-ae0c-40ed0d550a30" is-local="false"><a href="https://www.chatsimple.ai/?utm_source=widget&utm_medium=referral">copilot</a></co-pilot> 
+  <script src="https://cdn.chatsimple.ai/ai-loader.js" defer></script>
 </body>
-
 </html>
