@@ -65,12 +65,12 @@ const filterItems = document.querySelectorAll("[data-filter-item]");
 
 const filterFunc = function (selectedValue) {
   for (let i = 0; i < filterItems.length; i++) {
-    if (selectedValue === "all") {
+    if (selectedValue === filterItems[i].dataset.category) {
       filterItems[i].classList.add("active");
-    } else if (selectedValue === filterItems[i].dataset.category) {
-      filterItems[i].classList.add("active");
+      filterItems[i].style.display = "block";
     } else {
       filterItems[i].classList.remove("active");
+      filterItems[i].style.display = "none";
     }
   }
 }
@@ -170,17 +170,16 @@ serviceItems.forEach(item => {
 
 // Project filter functionality
 document.addEventListener("DOMContentLoaded", function() {
-  const showAllButton = document.getElementById("show-all");
   const productManagementButton = document.getElementById("product-management");
   const aiButton = document.getElementById("ai");
   const dataAnalyticsButton = document.getElementById("data-analytics");
 
   const projects = document.querySelectorAll("[data-filter-item]");
-  const buttons = [showAllButton, productManagementButton, aiButton, dataAnalyticsButton];
+  const buttons = [productManagementButton, aiButton, dataAnalyticsButton];
 
   function filterProjects(category) {
     projects.forEach(project => {
-      if (category === "all" || project.getAttribute("data-category") === category) {
+      if (project.getAttribute("data-category") === category) {
         project.style.display = "block";
       } else {
         project.style.display = "none";
@@ -188,9 +187,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     buttons.forEach(button => button.classList.remove("active"));
-    if (category === "all") {
-      showAllButton.classList.add("active");
-    } else if (category === "product management") {
+    if (category === "product management") {
       productManagementButton.classList.add("active");
     } else if (category === "ai") {
       aiButton.classList.add("active");
@@ -198,10 +195,6 @@ document.addEventListener("DOMContentLoaded", function() {
       dataAnalyticsButton.classList.add("active");
     }
   }
-
-  showAllButton.addEventListener("click", function() {
-    filterProjects("all");
-  });
 
   productManagementButton.addEventListener("click", function() {
     filterProjects("product management");
