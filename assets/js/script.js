@@ -156,13 +156,13 @@ serviceItems.forEach(item => {
 
     // Apply the corresponding filter
     if (item.querySelector('.service-item-title').textContent.includes('Data')) {
-      filterProjects('data analytics');
+      filterFunc('data analytics');
       document.getElementById("data-analytics").classList.add("active");
     } else if (item.querySelector('.service-item-title').textContent.includes('Product')) {
-      filterProjects('product management');
+      filterFunc('product management');
       document.getElementById("product-management").classList.add("active");
     } else if (item.querySelector('.service-item-title').textContent.includes('AI')) {
-      filterProjects('ai');
+      filterFunc('ai');
       document.getElementById("ai").classList.add("active");
     }
   });
