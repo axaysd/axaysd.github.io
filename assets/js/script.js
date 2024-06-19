@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const aiButton = document.getElementById("ai");
   const dataAnalyticsButton = document.getElementById("data-analytics");
 
-  const projects = document.querySelectorAll(".project");
+  const projects = document.querySelectorAll("[data-filter-item]");
   const buttons = [showAllButton, productManagementButton, aiButton, dataAnalyticsButton];
 
   function filterProjects(category) {
