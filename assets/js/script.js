@@ -164,15 +164,27 @@ document.addEventListener("DOMContentLoaded", function() {
   const dataAnalyticsButton = document.getElementById("data-analytics");
 
   const projects = document.querySelectorAll(".project");
+  const buttons = [showAllButton, productManagementButton, aiButton, dataAnalyticsButton];
+
+  function filterProjects(category) {
+    projects.forEach(project => {
+      if (category === "all" || project.getAttribute("data-category") === category) {
+        project.style.display = "block";
+      } else {
+        project.style.display = "none";
+      }
+    });
+
+    buttons.forEach(button => button.classList.remove("active"));
+    document.getElementById(category === "all" ? "show-all" : category).classList.add("active");
+  }
 
   showAllButton.addEventListener("click", function() {
-    projects.forEach(project => {
-      project.style.display = "block";
-    });
+    filterProjects("all");
   });
 
   productManagementButton.addEventListener("click", function() {
-    filterProjects("product-management");
+    filterProjects("product management");
   });
 
   aiButton.addEventListener("click", function() {
@@ -180,21 +192,9 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   dataAnalyticsButton.addEventListener("click", function() {
-    filterProjects("data-analytics");
+    filterProjects("data analytics");
   });
 
-  function filterProjects(category) {
-    projects.forEach(project => {
-      if (project.getAttribute("data-category") === category) {
-        project.style.display = "block";
-      } else {
-        project.style.display = "none";
-      }
-    });
-  }
-
-  // Initially show all projects
-  projects.forEach(project => {
-    project.style.display = "block";
-  });
+  // Initially show all projects and highlight "Show All" button
+  filterProjects("all");
 });
