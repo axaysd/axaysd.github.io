@@ -1655,6 +1655,11 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .filter-item button.active { color: var(--orange-yellow-crayola); }
 
+  .filter-item .active {
+  background-color: yellow; /* or your preferred highlight color */
+  color: #fff;
+  }
+
   /* portfolio and blog grid */
 
   .project-list, .blog-posts-list { grid-template-columns: 1fr 1fr; }
