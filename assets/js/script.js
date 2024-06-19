@@ -64,16 +64,39 @@ for (let i = 0; i < selectItems.length; i++) {
 const filterItems = document.querySelectorAll("[data-filter-item]");
 
 const filterFunc = function (selectedValue) {
+  let hasVisibleProjects = false;
+  
   for (let i = 0; i < filterItems.length; i++) {
     if (selectedValue === filterItems[i].dataset.category) {
       filterItems[i].classList.add("active");
       filterItems[i].style.display = "block";
+      hasVisibleProjects = true;
     } else {
       filterItems[i].classList.remove("active");
       filterItems[i].style.display = "none";
     }
   }
+  
+  // Show or hide the no projects message
+  const noProjectsMessage = document.getElementById("no-projects-message");
+  if (hasVisibleProjects) {
+    noProjectsMessage.style.display = "none";
+  } else {
+    noProjectsMessage.style.display = "block";
+  }
 }
+
+// Initially show the no projects message
+document.addEventListener("DOMContentLoaded", function() {
+  const noProjectsMessage = document.getElementById("no-projects-message");
+  noProjectsMessage.style.display = "block";
+
+  // Hide all projects initially
+  const projects = document.querySelectorAll("[data-filter-item]");
+  projects.forEach(project => {
+    project.style.display = "none";
+  });
+});
 
 // add event in all filter button items for large screen
 let lastClickedBtn = filterBtn[0];
@@ -177,14 +200,25 @@ document.addEventListener("DOMContentLoaded", function() {
   const projects = document.querySelectorAll("[data-filter-item]");
   const buttons = [productManagementButton, aiButton, dataAnalyticsButton];
 
-  function filterProjects(category) {
+  function filterFunc(category) {
+    let hasVisibleProjects = false;
+    
     projects.forEach(project => {
       if (project.getAttribute("data-category") === category) {
         project.style.display = "block";
+        hasVisibleProjects = true;
       } else {
         project.style.display = "none";
       }
     });
+
+    // Show or hide the no projects message
+    const noProjectsMessage = document.getElementById("no-projects-message");
+    if (hasVisibleProjects) {
+      noProjectsMessage.style.display = "none";
+    } else {
+      noProjectsMessage.style.display = "block";
+    }
 
     buttons.forEach(button => button.classList.remove("active"));
     if (category === "product management") {
