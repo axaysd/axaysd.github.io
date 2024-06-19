@@ -153,6 +153,15 @@ serviceItems.forEach(item => {
 
     // Scroll to the top of the page or to the portfolio section
     window.scrollTo(0, 0);
+
+    // Apply the corresponding filter
+    if (item.querySelector('.service-item-title').textContent.includes('Data')) {
+      filterProjects('data analytics');
+    } else if (item.querySelector('.service-item-title').textContent.includes('Product')) {
+      filterProjects('product management');
+    } else if (item.querySelector('.service-item-title').textContent.includes('AI')) {
+      filterProjects('ai');
+    }
   });
 });
 
