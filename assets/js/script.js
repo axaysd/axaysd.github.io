@@ -176,7 +176,15 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     buttons.forEach(button => button.classList.remove("active"));
-    document.getElementById(category === "all" ? "show-all" : category).classList.add("active");
+    if (category === "all") {
+      showAllButton.classList.add("active");
+    } else if (category === "product management") {
+      productManagementButton.classList.add("active");
+    } else if (category === "ai") {
+      aiButton.classList.add("active");
+    } else if (category === "data analytics") {
+      dataAnalyticsButton.classList.add("active");
+    }
   }
 
   showAllButton.addEventListener("click", function() {
