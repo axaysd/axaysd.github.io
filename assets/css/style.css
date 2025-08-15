@@ -1923,4 +1923,10 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 .inline-contact {
   white-space: nowrap;
+  display: inline;
+}
+
+.inline-contact a {
+  white-space: nowrap;
+  display: inline;
 }
