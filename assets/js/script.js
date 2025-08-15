@@ -246,4 +246,89 @@ document.addEventListener("DOMContentLoaded", function() {
   projects.forEach(project => {
     project.style.display = "none";
   });
+
+  // Product Management Subfilter functionality
+  const productSubfilters = document.getElementById("product-subfilters");
+  const subfilterButtons = document.querySelectorAll("[data-subfilter]");
+  
+  // Show subfilters when Product Management is selected
+  function showProductSubfilters() {
+    productSubfilters.style.display = "block";
+  }
+  
+  function hideProductSubfilters() {
+    productSubfilters.style.display = "none";
+    // Reset subfilter buttons
+    subfilterButtons.forEach(btn => btn.classList.remove("active"));
+    document.querySelector('[data-subfilter="all"]').classList.add("active");
+  }
+  
+  // Enhanced filter function with subfilters
+  function enhancedFilterFunc(category, subfilter = "all") {
+    let hasVisibleProjects = false;
+    
+    projects.forEach(project => {
+      const projectCategory = project.getAttribute("data-category");
+      const projectType = project.getAttribute("data-project-type");
+      
+      if (projectCategory === category) {
+        if (subfilter === "all" || projectType === subfilter) {
+          project.style.display = "block";
+          hasVisibleProjects = true;
+        } else {
+          project.style.display = "none";
+        }
+      } else {
+        project.style.display = "none";
+      }
+    });
+
+    // Show or hide the no projects message
+    const noProjectsMessage = document.getElementById("no-projects-message");
+    if (hasVisibleProjects) {
+      noProjectsMessage.style.display = "none";
+    } else {
+      noProjectsMessage.style.display = "block";
+    }
+
+    // Update main filter buttons
+    buttons.forEach(button => button.classList.remove("active"));
+    if (category === "product management") {
+      productManagementButton.classList.add("active");
+      showProductSubfilters();
+    } else if (category === "ai") {
+      aiButton.classList.add("active");
+      hideProductSubfilters();
+    } else if (category === "data analytics") {
+      dataAnalyticsButton.classList.add("active");
+      hideProductSubfilters();
+    }
+  }
+
+  // Update main filter button event listeners
+  productManagementButton.addEventListener("click", function() {
+    enhancedFilterFunc("product management", "all");
+  });
+
+  aiButton.addEventListener("click", function() {
+    enhancedFilterFunc("ai");
+  });
+
+  dataAnalyticsButton.addEventListener("click", function() {
+    enhancedFilterFunc("data analytics");
+  });
+
+  // Add subfilter event listeners
+  subfilterButtons.forEach(button => {
+    button.addEventListener("click", function() {
+      const subfilter = this.getAttribute("data-subfilter");
+      
+      // Update subfilter button states
+      subfilterButtons.forEach(btn => btn.classList.remove("active"));
+      this.classList.add("active");
+      
+      // Apply subfilter
+      enhancedFilterFunc("product management", subfilter);
+    });
+  });
 });

@@ -168,7 +168,7 @@
                   </div>
                   <ol class="timeline-list">
                      <li class="timeline-item">
-                        <h4 class="h4 timeline-item-title">AI Product Manager</h4>
+                        <h4 class="h4 timeline-item-title">AI Product Manager @ Majorly</h4>
                         <span>February 2025 — Present</span>
                         <p class="timeline-text">   
                            • Identified a market gap with interview readiness products; prototyped and launched a real-time, speech-to-speech AI interview simulation feature with low-latency follow-ups, increasing Weekly Active Users by 20% vs. baseline, helping convert 3 customers in pilot phase to paid ones.<br>
@@ -176,12 +176,15 @@
                         </p>
                      </li>
                      <li class="timeline-item">
-                        <h4 class="h4 timeline-item-title">Product Manager (Fractional)</h4>
+                        <h4 class="h4 timeline-item-title">AI Product Manager (Fractional)</h4>
                         <span>September 2024 — February 2025</span>
                         <p class="timeline-text">
                            Founded a GenAI Product Consultancy and worked with 3 clients in the VC, CFO Office/FP&A and EdTech industries.<br>
-                           <strong>SprintFit (VC analysis tool):</strong> Cut VC screening time by 70% with an automated pitch deck evaluation (RAG + agentic pipeline) that extracted key investment signals (market, team, traction) and standardized scoring criteria, securing 2 VC firms as design partners.<br>
-                           <strong>SowFin (CFO/FP&A Copilot):</strong> Ran JTBD-style user interviews with 15 CFOs and uncovered two priorities: avoid sending internal financial data to external LLM providers and enable self-serve data analysis and visualization. Drove concept to launch of a natural-language-to-SQL and charting feature (fine-tuned Llama 3.2 3B SLM) based on interview insights, achieving 92% contextual accuracy in pilots and converting 40% of interviewed CFOs into pilots.
+                           <strong>@ SprintFit (VC analysis tool):</strong><br>
+                           • Cut VC screening time by 70% with an automated pitch deck evaluation (RAG + agentic pipeline) that extracted key investment signals (market, team, traction) and standardized scoring criteria, securing 2 VC firms as design partners.<br>
+                           <strong>@ SowFin (CFO/FP&A Copilot):</strong><br>
+                           • Ran JTBD-style user interviews with 15 CFOs and uncovered two priorities: avoid sending internal financial data to external LLM providers and enable self-serve data analysis and visualization.<br>
+                           • Drove concept to launch of a natural-language-to-SQL and charting feature (fine-tuned Llama 3.2 3B SLM) based on interview insights, achieving 92% contextual accuracy in pilots and converting 40% of interviewed CFOs into pilots.
                         </p>
                      </li>
                      <li class="timeline-item">
@@ -204,8 +207,8 @@
                         <h4 class="h4 timeline-item-title">Data Scientist @ Golden Gate University</h4>
                         <span>December 2023 — September 2024</span>
                         <p class="timeline-text">
-                           • Developing and deploying dynamic reports with data visualizations and interactive dashboards, using Pandas, SQL, and Tableau, enabling data-driven decision making in real-time for senior leadership.<br>
-                           • Led UAT sessions with stakeholders, iterating on user requirements and the product documentation to improve decision-supporting dashboards and reports.
+                           • Performed Exploratory Data Analysis (EDA), developed and deployed dynamic reports and interactive dashboards using Pandas, SQL, and Tableau, enabling data-driven decision making in real-time for senior leadership.<br>
+                           • Built predictive models in Python (scikit-learn) using student academic records and enrollment history to forecast enrollment and retention, improving accuracy by 8%.
                         </p>
                      </li>
                      <li class="timeline-item">
@@ -258,6 +261,24 @@
                         <button id="ai">AI</button>
                      </li>
                   </ul>
+                  
+                  <!-- Product Management Sub-filters -->
+                  <div id="product-subfilters" class="subfilter-list" style="display: none;">
+                     <ul class="subfilter-items">
+                        <li class="subfilter-item">
+                           <button class="subfilter-btn active" data-subfilter="all">All <span class="count-badge">(10)</span></button>
+                        </li>
+                        <li class="subfilter-item">
+                           <button class="subfilter-btn" data-subfilter="projects">Projects <span class="count-badge">(2)</span></button>
+                        </li>
+                        <li class="subfilter-item">
+                           <button class="subfilter-btn" data-subfilter="learnings">Learnings & Notes <span class="count-badge">(3)</span></button>
+                        </li>
+                        <li class="subfilter-item">
+                           <button class="subfilter-btn" data-subfilter="case-studies">Case Studies <span class="count-badge">(5)</span></button>
+                        </li>
+                     </ul>
+                  </div>
                   <div class="filter-select-box">
                      <button class="filter-select" data-select>
                         <div class="select-value" data-selecct-value>Select category</div>
@@ -280,7 +301,7 @@
 
                  <div id="no-projects-message" class="no-projects-message">⬑ Select the type of projects to show...</div>
                      <ul class="project-list">
-                        <li class="project-item active" data-filter-item data-category="data analytics">
+                        <li class="project-item active" data-filter-item data-category="data analytics" data-project-type="projects">
                            <a href="https://github.com/axaysd/Time-Series-Analysis-Anomaly-Detection/blob/main/My%20Solution%20(Code).ipynb">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -288,11 +309,12 @@
                                  </div>
                                  <img src="./assets/images/project-13.png" alt="finance" loading="lazy">
                               </figure>
+                              <div class="project-type-badge project-badge">🚀 Project</div>
                               <h3 class="project-title">Payments Failure Analysis - Time Series Analysis & Anomaly Detection</h3>
                               <p class="project-category">Python (pandas, Matplotlib), Isolation Forest</p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="data analytics">
+                        <li class="project-item active" data-filter-item data-category="data analytics" data-project-type="projects">
                            <a href="https://github.com/axaysd/SF-Crime-Prediction-EDA-LGBMClassifier">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -300,11 +322,12 @@
                                  </div>
                                  <img src="./assets/images/project-11.png" alt="finance" loading="lazy">
                               </figure>
+                              <div class="project-type-badge project-badge">🚀 Project</div>
                               <h3 class="project-title">San Francisco Crime Category (multi-class) Prediction: EDA, Visualizations, LGBMClassifier</h3>
                               <p class="project-category">Python (pandas, LGBMClassifier)</p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="data analytics">
+                        <li class="project-item active" data-filter-item data-category="data analytics" data-project-type="projects">
                            <a href="https://github.com/axaysd/Telecom-Customer-Churn-Analysis">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -312,11 +335,12 @@
                                  </div>
                                  <img src="./assets/images/project-1.jpg" alt="finance" loading="lazy">
                               </figure>
+                              <div class="project-type-badge project-badge">🚀 Project</div>
                               <h3 class="project-title">Churn Analysis on Telecom customer data</h3>
                               <p class="project-category">Python (NumPy, Pandas, scikit-learn)</p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="data analytics">
+                        <li class="project-item active" data-filter-item data-category="data analytics" data-project-type="projects">
                            <a href="https://github.com/axaysd/SpeciesClassificationNN">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -324,11 +348,12 @@
                                  </div>
                                  <img src="./assets/images/evolution.png" alt="species-genes" loading="lazy">
                               </figure>
+                              <div class="project-type-badge project-badge">🚀 Project</div>
                               <h3 class="project-title">Predicting Hominid Species from their Genetic markers and Physical Traits using a Fully Connected Neural Network</h3>
                               <p class="project-category">Python (NumPy, Pandas, scikit-learn), Keras</p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="data analytics">
+                        <li class="project-item active" data-filter-item data-category="data analytics" data-project-type="projects">
                            <a href="https://github.com/axaysd/California_Housing_Price_Prediction">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -336,11 +361,12 @@
                                  </div>
                                  <img src="./assets/images/project-2.png" alt="orizon" loading="lazy">
                               </figure>
+                              <div class="project-type-badge project-badge">🚀 Project</div>
                               <h3 class="project-title">California Housing Price Prediction</h3>
                               <p class="project-category">Python (NumPy, Pandas, scikit-learn)</p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="data analytics">
+                        <li class="project-item active" data-filter-item data-category="data analytics" data-project-type="projects">
                            <a href="https://public.tableau.com/app/profile/akshay.danthi/viz/Cluster_Analysis_17023853801610/e-CommerceCustomerClusterAnalysis">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -348,11 +374,12 @@
                                  </div>
                                  <img src="./assets/images/project-3.png" alt="fundo" loading="lazy">
                               </figure>
+                              <div class="project-type-badge project-badge">🚀 Project</div>
                               <h3 class="project-title">Cluster Analysis on eCommerce data</h3>
                               <p class="project-category">Tableau</p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="data analytics">
+                        <li class="project-item active" data-filter-item data-category="data analytics" data-project-type="case-studies">
                            <a href="https://public.tableau.com/app/profile/akshay.danthi5949/viz/CareerQuest2024Performance/InterviewClinic">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -360,12 +387,13 @@
                                  </div>
                                  <img src="./assets/images/pmi.png" alt="pmi" loading="lazy">
                               </figure>
+                              <div class="project-type-badge case-study-badge">📋 Case Study</div>
                               <h3 class="project-title">My Engagement tracker dashboard solution to PMI's Let's JAM competition.</h3>
                               <h3 class="project-title"><i>[Winner of 'Most Practical & Scalable Solution' category]</i></h3>
                               <p class="project-category">Tableau Dashboard, Product Analytics, Performance Management</p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="data analytics">
+                        <li class="project-item active" data-filter-item data-category="data analytics" data-project-type="projects">
                            <a href="https://github.com/axaysd/United_Airlines_Baggage_Issues_Analysis">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -373,11 +401,12 @@
                                  </div>
                                  <img src="./assets/images/project-4.png" alt="brawlhalla" loading="lazy">
                               </figure>
+                              <div class="project-type-badge project-badge">🚀 Project</div>
                               <h3 class="project-title">Sentiment Analysis on United Airlines reviews from AirlineQuality.com</h3>
                               <p class="project-category">R (syuzhet, tm, tidyverse, ggplot2)</p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="data analytics">
+                        <li class="project-item active" data-filter-item data-category="data analytics" data-project-type="learnings">
                            <a href="https://github.com/axaysd/SQL-interview-questions-practice">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -385,11 +414,12 @@
                                  </div>
                                  <img src="./assets/images/sql_interview.png" alt="SQL" loading="lazy">
                               </figure>
+                              <div class="project-type-badge learnings-badge">📚 Learning</div>
                               <h3 class="project-title">My solutions to SQL interview questions from TryExponent.com and DataInterview.com</h3>
                               <p class="project-category">SQL</p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="data analytics">
+                        <li class="project-item active" data-filter-item data-category="data analytics" data-project-type="projects">
                            <a href="https://github.com/axaysd/Nike-Kaepernick">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -397,11 +427,12 @@
                                  </div>
                                  <img src="./assets/images/project-5.png" alt="dsm." loading="lazy">
                               </figure>
+                              <div class="project-type-badge project-badge">🚀 Project</div>
                               <h3 class="project-title">Social Media Strategy Analysis on the Nike-Kaepernick controversy</h3>
                               <p class="project-category">R (syuzhet, tm, tidyverse, ggplot2)</p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="data analytics">
+                        <li class="project-item active" data-filter-item data-category="data analytics" data-project-type="projects">
                            <a href="https://github.com/axaysd/Cluster-Analysis-on-Dogfood-customers">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -409,24 +440,26 @@
                                  </div>
                                  <img src="./assets/images/project-6.png" alt="metaspark" loading="lazy">
                               </figure>
+                              <div class="project-type-badge project-badge">🚀 Project</div>
                               <h3 class="project-title">Cluster Analysis on Dogfood customers</h3>
                               <p class="project-category">R</p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="data analytics">
+                        <li class="project-item active" data-filter-item data-category="data analytics" data-project-type="projects">
                            <a href="https://github.com/axaysd/Markov-Chain-Simulation-Comparing-the-cost-effectiveness-of-2-treatments-of-Chronic-diseases">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
                                     <ion-icon name="eye-outline"></ion-icon>
                                  </div>
-                                 <img src="./assets/images/pharma_markov.png" alt="SQL" loading="lazy">
+                                 <img src="./assets/images/pharma_markov.png" alt="testing" loading="lazy">
                               </figure>
+                              <div class="project-type-badge project-badge">🚀 Project</div>
                               <h3 class="project-title">Markov Chain Simulation: Comparing the cost-effectiveness of 2 treatments of Chronic diseases</h3>
                               <p class="project-category">Markov Chains</p>
                            </a>
                         </li>
                         
-                        <li class="project-item active" data-filter-item data-category="product management">
+                        <li class="project-item active" data-filter-item data-category="product management" data-project-type="case-studies">
                            <a href="./Case Studies/Zerodha Varsity GTM plan - Accelerating Zerodhas PLG enabled Growth via Varsity.pdf">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -434,12 +467,13 @@
                                  </div>
                                  <img src="./assets/images/project-C3.png" alt="summary" loading="lazy">
                               </figure>
+                              <div class="project-type-badge case-study-badge">📋 Case Study</div>
                               <h3 class="project-title">Educational app to acquire users for Zerodha (investment platform) in the PLG way</h3>
                               <p class="project-category">PMSchool Product Improvement competition</p>
                            </a>
                         </li>
                         
-                        <li class="project-item active" data-filter-item data-category="product management">
+                        <li class="project-item active" data-filter-item data-category="product management" data-project-type="case-studies">
                            <a href="./Case Studies/Improving Navigation screen of Google Maps.pdf">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -447,11 +481,12 @@
                                  </div>
                                  <img src="./assets/images/project-C2.png" alt="summary" loading="lazy">
                               </figure>
+                              <div class="project-type-badge case-study-badge">📋 Case Study</div>
                               <h3 class="project-title">Improve Google Maps' Navigation UI for Car and 2-wheeler drivers.</h3>
                               <p class="project-category">PMSchool Product Improvement competition</p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="product management">
+                        <li class="project-item active" data-filter-item data-category="product management" data-project-type="case-studies">
                            <a href="./Case Studies/Fixing the Decline in Organic Growth in Finshots.pdf">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -459,12 +494,13 @@
                                  </div>
                                  <img src="./assets/images/project-C1.png" alt="summary" loading="lazy">
                               </figure>
+                              <div class="project-type-badge case-study-badge">📋 Case Study</div>
                               <h3 class="project-title">Fixing the Decline in Organic Growth in Finshots App.</h3>
                               <p class="project-category">PMSchool Product Improvement competition</p>
                            </a>
                         </li>
 
-                        <li class="project-item active" data-filter-item data-category="product management">
+                        <li class="project-item active" data-filter-item data-category="product management" data-project-type="case-studies">
                            <a href="./Case Studies/Solution to LeafLife's Revenue Growth Maximization Case Study.pdf">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -472,12 +508,13 @@
                                  </div>
                                  <img src="./assets/images/project-C4.png" alt="summary" loading="lazy">
                               </figure>
+                              <div class="project-type-badge case-study-badge">📋 Case Study</div>
                               <h3 class="project-title">Product Metrics Case-Study: Maximizing Cumulative Revenue, Number of Customers, CSAT for LeafLife</h3>
                               <p class="project-category">Product Metrics</p>
                            </a>
                         </li>
                         
-                        <li class="project-item active" data-filter-item data-category="product management">
+                        <li class="project-item active" data-filter-item data-category="product management" data-project-type="projects">
                            <a href="https://gelatinous-spandex-35a.notion.site/How-I-d-improve-Google-Maps-7a89c605790346f7b82310f03a45b4e4?pvs=4">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -485,11 +522,12 @@
                                  </div>
                                  <img src="./assets/images/project-7.png" alt="summary" loading="lazy">
                               </figure>
+                              <div class="project-type-badge project-badge">🚀 Project</div>
                               <h3 class="project-title">How I'd improve Google Maps</h3>
                               <p class="project-category">Product Improvement</p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="product management">
+                        <li class="project-item active" data-filter-item data-category="product management" data-project-type="projects">
                            <a href="./SkillProbe.AI_PRD.pdf">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -497,11 +535,12 @@
                                  </div>
                                  <img src="./assets/images/project-8.png" alt="task manager" loading="lazy">
                               </figure>
+                              <div class="project-type-badge project-badge">🚀 Project</div>
                               <h3 class="project-title">PRD: SkillProbe.AI: An AI Interview Simulation Product</h3>
                               <p class="project-category">PRD</p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="product management">
+                        <li class="project-item active" data-filter-item data-category="product management" data-project-type="learnings">
                            <a href="https://gelatinous-spandex-35a.notion.site/KPIs-to-track-for-GenAI-features-c54da0bdb3a4441383b7a08cf89a5f39?pvs=4">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -509,11 +548,12 @@
                                  </div>
                                  <img src="./assets/images/kpi_genai.png" alt="task manager" loading="lazy">
                               </figure>
+                              <div class="project-type-badge learnings-badge">📚 Learning</div>
                               <h3 class="project-title">My learnings - KPIs to track for GenAI features/products</h3>
                               <p class="project-category">Learnings</p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="product management">
+                        <li class="project-item active" data-filter-item data-category="product management" data-project-type="learnings">
                            <a href="https://gelatinous-spandex-35a.notion.site/How-to-develop-Pricing-strategies-for-AI-ML-Products-as-an-AI-Product-Manager-54e869a8e6184ebca8df9c918821f089?pvs=4">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -521,11 +561,12 @@
                                  </div>
                                  <img src="./assets/images/ml_pricing.png" alt="task manager" loading="lazy">
                               </figure>
+                              <div class="project-type-badge learnings-badge">📚 Learning</div>
                               <h3 class="project-title">My notes - How to develop Pricing strategies for ML products as a Product Manager</h3>
                               <p class="project-category">Learnings</p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="product management">
+                        <li class="project-item active" data-filter-item data-category="product management" data-project-type="learnings">
                            <a href="https://gelatinous-spandex-35a.notion.site/Hooked-by-Nir-Eyal-How-to-create-habit-forming-Products-fb8497acaac84ec583ae11994a31b17a?pvs=4">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -533,11 +574,12 @@
                                  </div>
                                  <img src="./assets/images/feedback_loop.png" alt="task manager" loading="lazy">
                               </figure>
+                              <div class="project-type-badge learnings-badge">📚 Learning</div>
                               <h3 class="project-title">My learnings from Hooked by Nir Eyal (How to build Habit-Forming products)</h3>
                               <p class="project-category">Learnings</p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="product management">
+                        <li class="project-item active" data-filter-item data-category="product management" data-project-type="case-studies">
                            <a href="https://docs.google.com/presentation/d/13ktdkNC_VeXiOf13JDbF7cXGY6w9yZrk/edit?usp=sharing&ouid=101329279615921623878&rtpof=true&sd=true">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -545,13 +587,14 @@
                                  </div>
                                  <img src="./assets/images/pmi-ppt.png" alt="pmi" loading="lazy">
                               </figure>
+                              <div class="project-type-badge case-study-badge">📋 Case Study</div>
                               <h3 class="project-title">My solution to PMI's Let's JAM case study competition.</h3>
                               <h3 class="project-title"><i>[Winner of Most Practical & Scalable Solution category]</i></h3>
                               <p class="project-category">Case Study, OKR, Performance Management, Analytics, Tableau dashboard</p>
                            </a>
                         </li>
 
-                        <li class="project-item active" data-filter-item data-category="ai">
+                        <li class="project-item active" data-filter-item data-category="ai" data-project-type="projects">
                            <a href="https://github.com/axaysd/JobFuse">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -559,6 +602,7 @@
                                  </div>
                                  <img src="./assets/images/project-16.png" alt="arrival" loading="lazy">
                               </figure>
+                              <div class="project-type-badge project-badge">🚀 Project</div>
                               <h3 class="project-title">GenAI-powered Job Application Assistant [Google Chrome extension] (July 2025)</h3>
                               <p class="project-category">LLM cost optimization, LLM APIs, Manus.IM for scraping, LinkedIn Sales Navigator</p>
                               <p class="project-category">
@@ -569,7 +613,7 @@
                            </a>
                         </li>
 
-                        <li class="project-item active" data-filter-item data-category="ai">
+                        <li class="project-item active" data-filter-item data-category="ai" data-project-type="projects">
                            <a href="https://user-persona-finder.onrender.com/">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -577,6 +621,7 @@
                                  </div>
                                  <img src="./assets/images/project-14.png" alt="arrival" loading="lazy">
                               </figure>
+                              <div class="project-type-badge project-badge">🚀 Project</div>
                               <h3 class="project-title">Service that creates distinct User Personas based on the content from a Reddit post and comments (User needs & pain-points) using CrewAI (for Agentic RAG), Groq (for GenAI services), and Reddit API (PRAW). (Dec 2024)</h3>
                               <p class="project-category">CrewAI API, Groq API, Reddit API (PRAW)</p>
                               <p class="project-category">
@@ -587,7 +632,7 @@
                            </a>
                         </li>
                         
-                        <li class="project-item active" data-filter-item data-category="ai">
+                        <li class="project-item active" data-filter-item data-category="ai" data-project-type="projects">
                            <a href="https://github.com/axaysd/learnr.ai">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -595,6 +640,7 @@
                                  </div>
                                  <img src="./assets/images/project-12.png" alt="arrival" loading="lazy">
                               </figure>
+                              <div class="project-type-badge project-badge">🚀 Project</div>
                               <h3 class="project-title">Learnr.AI - WebApp that uses GenAI to explain new concepts in an Intuitive and Effective way. Uses Hooked principles to make users more engaged. (Sep 2024)</h3>
                               <p class="project-category">OpenAI API, GraphViz</p>
                               <p class="project-category">
@@ -604,7 +650,7 @@
                            </p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="ai">
+                        <li class="project-item active" data-filter-item data-category="ai" data-project-type="projects">
                            <a href="https://github.com/axaysd/Data-Visualizations-from-Natural-Language-Queries-using-Small-Language-Models-SLMs-">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -612,13 +658,14 @@
                                  </div>
                                  <img src="./assets/images/project-15.png" alt="arrival" loading="lazy">
                               </figure>
+                              <div class="project-type-badge project-badge">🚀 Project</div>
                               <h3 class="project-title">Get Data Visualizations from Plain English queries SECURELY without data leaving internal systems (Aug 2024)</h3>
                               <p class="project-category">Llama3.2-1B (Small Language Model), Ollama</p>
                               <p class="project-category">
                            </p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="ai">
+                        <li class="project-item active" data-filter-item data-category="ai" data-project-type="projects">
                            <a href="https://github.com/axaysd/website-chat-1">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -626,6 +673,7 @@
                                  </div>
                                  <img src="./assets/images/project-9.png" alt="arrival" loading="lazy">
                               </figure>
+                              <div class="project-type-badge project-badge">🚀 Project</div>
                               <h3 class="project-title">ChatRAG - RAG app that enables user to chat and get insights from information from user input URL (Dec 2023)</h3>
                               <p class="project-category">RAG, LangChain, ChromaDB Vector DB</p>
                               <p class="project-category">
@@ -635,7 +683,7 @@
                            </p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="ai">
+                        <li class="project-item active" data-filter-item data-category="ai" data-project-type="projects">
                            <a href="https://github.com/axaysd/SpeciesClassificationNN">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -643,11 +691,12 @@
                                  </div>
                                  <img src="./assets/images/evolution.png" alt="species-genes" loading="lazy">
                               </figure>
+                              <div class="project-type-badge project-badge">🚀 Project</div>
                               <h3 class="project-title">Predicting Hominid Species from their Genetic markers and Physical Traits using a Fully Connected Neural Network</h3>
                               <p class="project-category">Python (NumPy, Pandas, scikit-learn), Keras</p>
                            </a>
                         </li>
-                        <li class="project-item active" data-filter-item data-category="ai">
+                        <li class="project-item active" data-filter-item data-category="ai" data-project-type="projects">
                            <a href="https://github.com/axaysd/Movie-Recommender-system-and-how-to-resolve-bias-in-Hybrid-Recommender-systems">
                               <figure class="project-img">
                                  <div class="project-item-icon-box">
@@ -655,6 +704,7 @@
                                  </div>
                                  <img src="./assets/images/project-10.png" alt="implicit" loading="lazy">
                               </figure>
+                              <div class="project-type-badge project-badge">🚀 Project</div>
                               <h3 class="project-title">Resolving Implicit Selection Bias in Hybrid Recommender Systems (2017)</h3>
                               <p class="project-category">NumPy, scikit-learn, lightfm</p>
                            </a>
