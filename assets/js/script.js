@@ -56,35 +56,14 @@ for (let i = 0; i < selectItems.length; i++) {
     let selectedValue = this.innerText.toLowerCase();
     selectValue.innerText = this.innerText;
     elementToggleFunc(select);
-    filterFunc(selectedValue);
+    // Use enhanced filter function instead of old filterFunc
+    if (enhancedFilterFunc) {
+      enhancedFilterFunc(selectedValue, "all");
+    }
   });
 }
 
-// filter variables
-const filterItems = document.querySelectorAll("[data-filter-item]");
 
-const filterFunc = function (selectedValue) {
-  let hasVisibleProjects = false;
-  
-  for (let i = 0; i < filterItems.length; i++) {
-    if (selectedValue === filterItems[i].dataset.category) {
-      filterItems[i].classList.add("active");
-      filterItems[i].style.display = "block";
-      hasVisibleProjects = true;
-    } else {
-      filterItems[i].classList.remove("active");
-      filterItems[i].style.display = "none";
-    }
-  }
-  
-  // Show or hide the no projects message
-  const noProjectsMessage = document.getElementById("no-projects-message");
-  if (hasVisibleProjects) {
-    noProjectsMessage.style.display = "none";
-  } else {
-    noProjectsMessage.style.display = "block";
-  }
-}
 
 // Initially show the no projects message
 document.addEventListener("DOMContentLoaded", function() {
@@ -98,19 +77,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
-// add event in all filter button items for large screen
-let lastClickedBtn = filterBtn[0];
 
-for (let i = 0; i < filterBtn.length; i++) {
-  filterBtn[i].addEventListener("click", function () {
-    let selectedValue = this.innerText.toLowerCase();
-    selectValue.innerText = this.innerText;
-    filterFunc(selectedValue);
-    lastClickedBtn.classList.remove("active");
-    this.classList.add("active");
-    lastClickedBtn = this;
-  });
-}
 
 // contact form variables
 const form = document.querySelector("[data-form]");
@@ -177,19 +144,19 @@ serviceItems.forEach(item => {
     // Scroll to the top of the page or to the portfolio section
     window.scrollTo(0, 0);
 
-    // Apply the corresponding filter
+    // Apply the corresponding filter using enhanced function
     if (item.querySelector('.service-item-title').textContent.includes('Data')) {
-      filterFunc('data analytics');
-      document.getElementById("data-analytics").classList.add("active");
+      enhancedFilterFunc('data analytics', 'all');
     } else if (item.querySelector('.service-item-title').textContent.includes('Product')) {
-      filterFunc('product management');
-      document.getElementById("product-management").classList.add("active");
+      enhancedFilterFunc('product management', 'all');
     } else if (item.querySelector('.service-item-title').textContent.includes('AI')) {
-      filterFunc('ai');
-      document.getElementById("ai").classList.add("active");
+      enhancedFilterFunc('ai', 'all');
     }
   });
 });
+
+// Enhanced filter function with subfilters (global scope)
+let enhancedFilterFunc;
 
 // Project filter functionality
 document.addEventListener("DOMContentLoaded", function() {
@@ -200,71 +167,8 @@ document.addEventListener("DOMContentLoaded", function() {
   const projects = document.querySelectorAll("[data-filter-item]");
   const buttons = [productManagementButton, aiButton, dataAnalyticsButton];
 
-  function filterFunc(category) {
-    let hasVisibleProjects = false;
-    
-    projects.forEach(project => {
-      if (project.getAttribute("data-category") === category) {
-        project.style.display = "block";
-        hasVisibleProjects = true;
-      } else {
-        project.style.display = "none";
-      }
-    });
-
-    // Show or hide the no projects message
-    const noProjectsMessage = document.getElementById("no-projects-message");
-    if (hasVisibleProjects) {
-      noProjectsMessage.style.display = "none";
-    } else {
-      noProjectsMessage.style.display = "block";
-    }
-
-    buttons.forEach(button => button.classList.remove("active"));
-    if (category === "product management") {
-      productManagementButton.classList.add("active");
-    } else if (category === "ai") {
-      aiButton.classList.add("active");
-    } else if (category === "data analytics") {
-      dataAnalyticsButton.classList.add("active");
-    }
-  }
-
-  productManagementButton.addEventListener("click", function() {
-    filterFunc("product management");
-  });
-
-  aiButton.addEventListener("click", function() {
-    filterFunc("ai");
-  });
-
-  dataAnalyticsButton.addEventListener("click", function() {
-    filterFunc("data analytics");
-  });
-
-  // Initially hide all projects
-  projects.forEach(project => {
-    project.style.display = "none";
-  });
-
-  // Product Management Subfilter functionality
-  const productSubfilters = document.getElementById("product-subfilters");
-  const subfilterButtons = document.querySelectorAll("[data-subfilter]");
-  
-  // Show subfilters when Product Management is selected
-  function showProductSubfilters() {
-    productSubfilters.style.display = "block";
-  }
-  
-  function hideProductSubfilters() {
-    productSubfilters.style.display = "none";
-    // Reset subfilter buttons
-    subfilterButtons.forEach(btn => btn.classList.remove("active"));
-    document.querySelector('[data-subfilter="all"]').classList.add("active");
-  }
-  
   // Enhanced filter function with subfilters
-  function enhancedFilterFunc(category, subfilter = "all") {
+  enhancedFilterFunc = function(category, subfilter = "all") {
     let hasVisibleProjects = false;
     
     projects.forEach(project => {
@@ -291,19 +195,19 @@ document.addEventListener("DOMContentLoaded", function() {
       noProjectsMessage.style.display = "block";
     }
 
-    // Update main filter buttons
+    // Update main filter buttons and show appropriate subfilters
     buttons.forEach(button => button.classList.remove("active"));
     if (category === "product management") {
       productManagementButton.classList.add("active");
       showProductSubfilters();
     } else if (category === "ai") {
       aiButton.classList.add("active");
-      hideProductSubfilters();
+      showAISubfilters();
     } else if (category === "data analytics") {
       dataAnalyticsButton.classList.add("active");
-      hideProductSubfilters();
+      showDataAnalyticsSubfilters();
     }
-  }
+  };
 
   // Update main filter button event listeners
   productManagementButton.addEventListener("click", function() {
@@ -311,24 +215,95 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   aiButton.addEventListener("click", function() {
-    enhancedFilterFunc("ai");
+    enhancedFilterFunc("ai", "all");
   });
 
   dataAnalyticsButton.addEventListener("click", function() {
-    enhancedFilterFunc("data analytics");
+    enhancedFilterFunc("data analytics", "all");
   });
 
-  // Add subfilter event listeners
-  subfilterButtons.forEach(button => {
+  // Initially hide all projects
+  projects.forEach(project => {
+    project.style.display = "none";
+  });
+
+  // Subfilter functionality for all three categories
+  const productSubfilters = document.getElementById("product-subfilters");
+  const aiSubfilters = document.getElementById("ai-subfilters");
+  const dataAnalyticsSubfilters = document.getElementById("data-analytics-subfilters");
+  const productSubfilterButtons = document.querySelectorAll("#product-subfilters [data-subfilter]");
+  const aiSubfilterButtons = document.querySelectorAll("#ai-subfilters [data-subfilter]");
+  const dataAnalyticsSubfilterButtons = document.querySelectorAll("#data-analytics-subfilters [data-subfilter]");
+  
+  // Show/hide subfilters functions
+  function showProductSubfilters() {
+    productSubfilters.style.display = "block";
+    aiSubfilters.style.display = "none";
+    dataAnalyticsSubfilters.style.display = "none";
+  }
+  
+  function showAISubfilters() {
+    aiSubfilters.style.display = "block";
+    productSubfilters.style.display = "none";
+    dataAnalyticsSubfilters.style.display = "none";
+  }
+  
+  function showDataAnalyticsSubfilters() {
+    dataAnalyticsSubfilters.style.display = "block";
+    productSubfilters.style.display = "none";
+    aiSubfilters.style.display = "none";
+  }
+  
+  function hideAllSubfilters() {
+    productSubfilters.style.display = "none";
+    aiSubfilters.style.display = "none";
+    dataAnalyticsSubfilters.style.display = "none";
+    // Reset all subfilter buttons
+    productSubfilterButtons.forEach(btn => btn.classList.remove("active"));
+    aiSubfilterButtons.forEach(btn => btn.classList.remove("active"));
+    dataAnalyticsSubfilterButtons.forEach(btn => btn.classList.remove("active"));
+    document.querySelector('#product-subfilters [data-subfilter="all"]').classList.add("active");
+    document.querySelector('#ai-subfilters [data-subfilter="all"]').classList.add("active");
+    document.querySelector('#data-analytics-subfilters [data-subfilter="all"]').classList.add("active");
+  }
+
+  // Add subfilter event listeners for all categories
+  productSubfilterButtons.forEach(button => {
     button.addEventListener("click", function() {
       const subfilter = this.getAttribute("data-subfilter");
       
-      // Update subfilter button states
-      subfilterButtons.forEach(btn => btn.classList.remove("active"));
+      // Update Product Management subfilter button states
+      productSubfilterButtons.forEach(btn => btn.classList.remove("active"));
       this.classList.add("active");
       
       // Apply subfilter
       enhancedFilterFunc("product management", subfilter);
+    });
+  });
+  
+  aiSubfilterButtons.forEach(button => {
+    button.addEventListener("click", function() {
+      const subfilter = this.getAttribute("data-subfilter");
+      
+      // Update AI subfilter button states
+      aiSubfilterButtons.forEach(btn => btn.classList.remove("active"));
+      this.classList.add("active");
+      
+      // Apply subfilter
+      enhancedFilterFunc("ai", subfilter);
+    });
+  });
+  
+  dataAnalyticsSubfilterButtons.forEach(button => {
+    button.addEventListener("click", function() {
+      const subfilter = this.getAttribute("data-subfilter");
+      
+      // Update Data Analytics subfilter button states
+      dataAnalyticsSubfilterButtons.forEach(btn => btn.classList.remove("active"));
+      this.classList.add("active");
+      
+      // Apply subfilter
+      enhancedFilterFunc("data analytics", subfilter);
     });
   });
 });
