@@ -158,6 +158,50 @@ serviceItems.forEach(item => {
 // Enhanced filter function with subfilters (global scope)
 let enhancedFilterFunc;
 
+// Dynamic count calculation function
+function updateProjectCounts() {
+  const projects = document.querySelectorAll("[data-filter-item]");
+  
+  // Count projects by category and type
+  const counts = {
+    'product management': { all: 0, projects: 0, learnings: 0, 'case-studies': 0 },
+    'ai': { all: 0, projects: 0, learnings: 0 },
+    'data analytics': { all: 0, projects: 0, learnings: 0, 'case-studies': 0 }
+  };
+  
+  projects.forEach(project => {
+    const category = project.getAttribute("data-category");
+    const type = project.getAttribute("data-project-type");
+    
+    if (counts[category]) {
+      counts[category].all++;
+      if (counts[category][type] !== undefined) {
+        counts[category][type]++;
+      }
+    }
+  });
+  
+  // Update count badges
+  Object.keys(counts).forEach(category => {
+    const categoryKey = category.replace(' ', '-');
+    const subfilterContainer = document.getElementById(`${categoryKey}-subfilters`);
+    
+    if (subfilterContainer) {
+      const countBadges = subfilterContainer.querySelectorAll('.count-badge');
+      const subfilterButtons = subfilterContainer.querySelectorAll('[data-subfilter]');
+      
+      subfilterButtons.forEach(button => {
+        const subfilter = button.getAttribute('data-subfilter');
+        const count = counts[category][subfilter] || 0;
+        const badge = button.querySelector('.count-badge');
+        if (badge) {
+          badge.textContent = `(${count})`;
+        }
+      });
+    }
+  });
+}
+
 // Project filter functionality
 document.addEventListener("DOMContentLoaded", function() {
   const productManagementButton = document.getElementById("product-management");
@@ -226,6 +270,9 @@ document.addEventListener("DOMContentLoaded", function() {
   projects.forEach(project => {
     project.style.display = "none";
   });
+  
+  // Update project counts dynamically
+  updateProjectCounts();
 
   // Subfilter functionality for all three categories
   const productSubfilters = document.getElementById("product-subfilters");
