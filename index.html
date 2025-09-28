@@ -106,7 +106,7 @@
                      </div>
                      <div class="contact-info">
                         <p class="contact-title">Email</p>
-                        <a href="mailto:axaysd@gmail.com" class="contact-link" onclick="posthogTracking.trackContactInteraction('email_click', {email: 'axaysd@gmail.com'}); posthogTracking.trackConversion('email_contact', 'sidebar');">axaysd@gmail.com</a>
+                        <a href="mailto:axaysd@gmail.com" class="contact-link" onclick="posthogTracking.trackContactInteraction('email_click', {email: 'axaysd@gmail.com', location: 'sidebar'}); posthogTracking.trackConversion('email_contact', 50, {location: 'sidebar', lead_quality: posthogTracking.calculateLeadQuality()});">axaysd@gmail.com</a>
                      </div>
                   </li>
                   <li class="contact-item">
@@ -115,7 +115,7 @@
                      </div>
                      <div class="contact-info">
                         <p class="contact-title">Phone</p>
-                        <a href="tel:+16284682958" class="contact-link" onclick="posthogTracking.trackContactInteraction('phone_click', {phone: '+16284682958'}); posthogTracking.trackConversion('phone_contact', 'sidebar');">+1 (628) 468-2958</a>
+                        <a href="tel:+16284682958" class="contact-link" onclick="posthogTracking.trackContactInteraction('phone_click', {phone: '+16284682958', location: 'sidebar'}); posthogTracking.trackConversion('phone_contact', 75, {location: 'sidebar', lead_quality: posthogTracking.calculateLeadQuality()});">+1 (628) 468-2958</a>
                      </div>
                   </li>
                   <li class="contact-item">
@@ -161,7 +161,7 @@
 🔹 AI Product Consulting – Design & Build intuitive, cost-effective AI-powered features, MVPs, & end-to-end solutions.<br>
 🔹 Data Solutions – Build pipelines for diagnostics, prediction, and real-time analytics.<br>
 <br>
-<span class="inline-contact">Need AI expertise? Let's talk!<br> <a href="https://calendly.com/axaysd" target="_blank" onclick="posthogTracking.trackContactInteraction('calendly_click', {url: 'https://calendly.com/axaysd'}); posthogTracking.trackConversion('meeting_scheduled', 'about_section');">📞 Schedule a meeting</a> | <a href="mailto:axaysd@gmail.com" onclick="posthogTracking.trackContactInteraction('email_click', {email: 'axaysd@gmail.com', context: 'about_section'}); posthogTracking.trackConversion('email_contact', 'about_section');">✉️ Email me</a></span>
+<span class="inline-contact">Need AI expertise? Let's talk!<br> <a href="https://calendly.com/axaysd" target="_blank" id="main-cta" onclick="posthogTracking.trackContactInteraction('calendly_click', {url: 'https://calendly.com/axaysd', location: 'about_section'}); posthogTracking.trackConversion('meeting_scheduled', 100, {location: 'about_section', lead_quality: posthogTracking.calculateLeadQuality(), cta_type: 'primary'}); const variant = this.getAttribute('data-ab-variant') || 'control'; posthogTracking.trackABTestConversion('cta_test', variant, 'conversion');">📞 Schedule a meeting</a> | <a href="mailto:axaysd@gmail.com" onclick="posthogTracking.trackContactInteraction('email_click', {email: 'axaysd@gmail.com', context: 'about_section'}); posthogTracking.trackConversion('email_contact', 50, {location: 'about_section', lead_quality: posthogTracking.calculateLeadQuality(), cta_type: 'secondary'});">✉️ Email me</a></span>
                   </p>
                </section>
                <section class="service">
@@ -857,9 +857,11 @@
       
       <!-- Additional PostHog Tracking -->
       <script>
-        // Track scroll depth
+        // Track scroll depth with engagement scoring
         let maxScrollDepth = 0;
         let scrollDepthTracked = false;
+        let scrollMilestones = [25, 50, 75, 90];
+        let trackedMilestones = new Set();
         
         window.addEventListener('scroll', function() {
           const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -869,37 +871,50 @@
           
           if (scrollDepth > maxScrollDepth) {
             maxScrollDepth = scrollDepth;
+            posthogTracking.userEngagement.scrollDepth = scrollDepth;
             
-            // Track milestone scroll depths
-            if (scrollDepth >= 25 && scrollDepth < 50 && !scrollDepthTracked) {
-              posthogTracking.trackInteraction('scroll_depth', {depth: 25});
-              scrollDepthTracked = true;
-            } else if (scrollDepth >= 50 && scrollDepth < 75) {
-              posthogTracking.trackInteraction('scroll_depth', {depth: 50});
-            } else if (scrollDepth >= 75 && scrollDepth < 90) {
-              posthogTracking.trackInteraction('scroll_depth', {depth: 75});
-            } else if (scrollDepth >= 90) {
-              posthogTracking.trackInteraction('scroll_depth', {depth: 90});
-            }
+            // Track milestone scroll depths as micro-conversions
+            scrollMilestones.forEach(milestone => {
+              if (scrollDepth >= milestone && !trackedMilestones.has(milestone)) {
+                trackedMilestones.add(milestone);
+                posthogTracking.trackMicroConversion('scroll_milestone', {
+                  scroll_depth: milestone,
+                  engagement_score: posthogTracking.calculateEngagementScore()
+                });
+                
+                // Identify user at 75% scroll depth
+                if (milestone >= 75) {
+                  posthogTracking.identifyUser('high_engagement_scroll');
+                }
+              }
+            });
           }
         });
         
-        // Track time on page
+        // Track time on page with engagement scoring
         let startTime = Date.now();
-        let timeOnPageTracked = false;
+        let timeMilestones = [30, 60, 120, 300]; // 30s, 1min, 2min, 5min
+        let trackedTimeMilestones = new Set();
         
         setInterval(function() {
           const timeOnPage = Math.round((Date.now() - startTime) / 1000);
+          posthogTracking.userEngagement.timeOnSite = timeOnPage;
           
-          // Track milestone time on page
-          if (timeOnPage >= 30 && timeOnPage < 60 && !timeOnPageTracked) {
-            posthogTracking.trackInteraction('time_on_page', {seconds: 30});
-            timeOnPageTracked = true;
-          } else if (timeOnPage >= 60 && timeOnPage < 120) {
-            posthogTracking.trackInteraction('time_on_page', {seconds: 60});
-          } else if (timeOnPage >= 120) {
-            posthogTracking.trackInteraction('time_on_page', {seconds: 120});
-          }
+          // Track milestone time on page as micro-conversions
+          timeMilestones.forEach(milestone => {
+            if (timeOnPage >= milestone && !trackedTimeMilestones.has(milestone)) {
+              trackedTimeMilestones.add(milestone);
+              posthogTracking.trackMicroConversion('time_milestone', {
+                time_seconds: milestone,
+                engagement_score: posthogTracking.calculateEngagementScore()
+              });
+              
+              // Identify user at 2 minutes
+              if (milestone >= 120) {
+                posthogTracking.identifyUser('high_engagement_time');
+              }
+            }
+          });
         }, 10000); // Check every 10 seconds
         
         // Track page visibility changes
@@ -915,15 +930,37 @@
           }
         });
         
-        // Track before page unload
+        // Track before page unload with funnel drop-off analysis
         window.addEventListener('beforeunload', function() {
+          const timeOnPage = Math.round((Date.now() - startTime) / 1000);
+          const lastAction = 'page_unload';
+          
+          // Determine funnel step based on user behavior
+          let funnelStep = 'landing';
+          if (posthogTracking.userEngagement.projectsViewed.size > 0) {
+            funnelStep = 'portfolio_exploration';
+          }
+          if (posthogTracking.userEngagement.interactions >= 5) {
+            funnelStep = 'high_engagement';
+          }
+          
+          // Track funnel drop-off if user didn't convert
+          if (timeOnPage > 30 && posthogTracking.userEngagement.interactions < 3) {
+            posthogTracking.trackFunnelDropoff(funnelStep, timeOnPage, lastAction);
+          }
+          
           posthogTracking.trackInteraction('page_unload', {
-            time_on_page: Math.round((Date.now() - startTime) / 1000),
-            max_scroll_depth: maxScrollDepth
+            time_on_page: timeOnPage,
+            max_scroll_depth: maxScrollDepth,
+            engagement_score: posthogTracking.calculateEngagementScore(),
+            projects_viewed: posthogTracking.userEngagement.projectsViewed.size,
+            total_interactions: posthogTracking.userEngagement.interactions,
+            funnel_step: funnelStep,
+            lead_quality: posthogTracking.calculateLeadQuality()
           });
         });
         
-        // Track clicks on external links (catch-all)
+        // Track clicks on external links with enhanced conversion tracking
         document.addEventListener('click', function(e) {
           const target = e.target.closest('a');
           if (target && target.href) {
@@ -933,15 +970,21 @@
             if (isExternal) {
               posthogTracking.trackExternalLink(url, target.textContent || target.innerText, 'general_click');
               
-              // Track funnel progression for external links
+              // Track conversions and micro-conversions for external links
               if (url.includes('github.com')) {
-                posthogTracking.trackFunnelStep('github_click', {url: url});
+                posthogTracking.trackConversion('github_follow', 30, {url: url, context: 'portfolio'});
+                posthogTracking.trackMicroConversion('github_engagement', {url: url});
               } else if (url.includes('calendly.com')) {
-                posthogTracking.trackFunnelStep('meeting_scheduled', {url: url});
+                posthogTracking.trackConversion('meeting_scheduled', 100, {url: url, context: 'cta'});
               } else if (url.includes('mailto:')) {
-                posthogTracking.trackFunnelStep('email_contact', {url: url});
+                posthogTracking.trackConversion('email_contact', 50, {url: url, context: 'cta'});
+              } else if (url.includes('linkedin.com')) {
+                posthogTracking.trackConversion('linkedin_connect', 40, {url: url, context: 'portfolio'});
+              } else if (url.includes('.pdf')) {
+                posthogTracking.trackConversion('resume_download', 25, {url: url, context: 'portfolio'});
+                posthogTracking.trackMicroConversion('document_download', {url: url});
               } else {
-                posthogTracking.trackFunnelStep('external_link', {url: url});
+                posthogTracking.trackMicroConversion('external_engagement', {url: url});
               }
             }
           }
@@ -978,6 +1021,28 @@
           }
         });
         
+        // Initialize A/B testing and feature flags
+        setTimeout(function() {
+          if (typeof posthog !== 'undefined') {
+            // Track feature flag exposures
+            const ctaVariant = posthogTracking.getFeatureFlag('cta_test_variant', 'control');
+            posthogTracking.trackFeatureFlagExposure('cta_test_variant', ctaVariant);
+            
+            // Apply A/B test variants
+            const ctaElement = document.getElementById('main-cta');
+            if (ctaElement && ctaVariant !== 'control') {
+              const optimalCTA = posthogTracking.getOptimalCTA();
+              ctaElement.textContent = optimalCTA.text;
+              ctaElement.setAttribute('data-ab-variant', optimalCTA.variant);
+              
+              // Track A/B test exposure
+              posthogTracking.trackABTestConversion('cta_test', optimalCTA.variant, 'exposure');
+            }
+            
+            console.log('PostHog A/B testing initialized');
+          }
+        }, 2000);
+        
         // DEBUG: Test PostHog functionality
         console.log('PostHog loaded:', typeof posthog !== 'undefined');
         console.log('PostHog distinct ID:', typeof posthog !== 'undefined' ? posthog.get_distinct_id() : 'Not available');
@@ -988,7 +1053,8 @@
             posthog.capture('test_event', {
               test_property: 'test_value',
               timestamp: new Date().toISOString(),
-              page_url: window.location.href
+              page_url: window.location.href,
+              engagement_score: posthogTracking.calculateEngagementScore()
             });
             console.log('Test event sent to PostHog');
           } else {

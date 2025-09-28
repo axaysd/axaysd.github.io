@@ -2,15 +2,73 @@
 
 // PostHog Analytics Helper Functions
 const posthogTracking = {
+  // User identification and engagement scoring
+  userEngagement: {
+    score: 0,
+    interactions: 0,
+    projectsViewed: new Set(),
+    timeOnSite: 0,
+    firstVisit: Date.now(),
+    isIdentified: false
+  },
+
+  // Calculate engagement score based on user behavior
+  calculateEngagementScore: function() {
+    let score = 0;
+    score += this.userEngagement.interactions * 2;
+    score += this.userEngagement.projectsViewed.size * 5;
+    score += Math.min(this.userEngagement.timeOnSite / 60, 10); // Max 10 points for time
+    score += this.userEngagement.scrollDepth || 0;
+    return Math.round(score);
+  },
+
+  // Identify user when they show high intent
+  identifyUser: function(context = 'high_intent') {
+    if (!this.userEngagement.isIdentified && typeof posthog !== 'undefined') {
+      const distinctId = posthog.get_distinct_id();
+      const userProperties = {
+        source: 'portfolio_website',
+        first_visit: new Date(this.userEngagement.firstVisit).toISOString(),
+        engagement_score: this.calculateEngagementScore(),
+        projects_viewed: Array.from(this.userEngagement.projectsViewed),
+        total_interactions: this.userEngagement.interactions,
+        identification_context: context
+      };
+      
+      posthog.identify(distinctId, userProperties);
+      this.userEngagement.isIdentified = true;
+      
+      // Track identification event
+      this.trackInteraction('user_identified', {
+        engagement_score: userProperties.engagement_score,
+        identification_context: context,
+        time_to_identify: Date.now() - this.userEngagement.firstVisit
+      });
+    }
+  },
+
   // Track user interactions
   trackInteraction: function(eventName, properties = {}) {
     if (typeof posthog !== 'undefined' && posthog.capture && !posthog.has_opted_out_capturing()) {
       try {
+        // Increment interaction counter
+        this.userEngagement.interactions++;
+        
+        // Auto-identify for high-value interactions
+        if (['contact_interaction', 'meeting_scheduled', 'email_contact'].includes(eventName)) {
+          this.identifyUser('conversion_intent');
+        } else if (this.userEngagement.interactions >= 5) {
+          this.identifyUser('high_engagement');
+        }
+        
         posthog.capture(eventName, {
           ...properties,
           timestamp: new Date().toISOString(),
           page_url: window.location.href,
-          page_title: document.title
+          page_title: document.title,
+          engagement_score: this.calculateEngagementScore(),
+          session_id: posthog.get_session_id(),
+          user_identified: this.userEngagement.isIdentified
         });
       } catch (error) {
         // Silently handle tracking errors
@@ -28,14 +86,36 @@ const posthogTracking = {
     });
   },
 
-  // Track portfolio interactions
-  trackPortfolioInteraction: function(action, projectTitle, projectCategory, projectType) {
+  // Track portfolio interactions with enhanced tracking
+  trackPortfolioInteraction: function(action, projectTitle, projectCategory, projectType, properties = {}) {
+    // Add to projects viewed set for engagement scoring
+    if (action === 'project_viewed' || action === 'project_clicked') {
+      this.userEngagement.projectsViewed.add(projectTitle);
+    }
+    
     this.trackInteraction('portfolio_interaction', {
       action: action,
       project_title: projectTitle,
       project_category: projectCategory,
-      project_type: projectType
+      project_type: projectType,
+      projects_viewed_count: this.userEngagement.projectsViewed.size,
+      engagement_score: this.calculateEngagementScore(),
+      ...properties
     });
+    
+    // Track content performance
+    this.trackContentPerformance('portfolio_project', projectTitle, action, {
+      category: projectCategory,
+      type: projectType
+    });
+    
+    // Track micro-conversions for project engagement
+    if (action === 'project_clicked') {
+      this.trackMicroConversion('project_engagement', {
+        project_title: projectTitle,
+        category: projectCategory
+      });
+    }
   },
 
   // Track external link clicks
@@ -83,13 +163,136 @@ const posthogTracking = {
     });
   },
 
-  // Track conversion events
-  trackConversion: function(type, value = null) {
+  // Track conversion events with value and lead scoring
+  trackConversion: function(type, value = null, properties = {}) {
+    const conversionValues = {
+      'email_contact': 50,
+      'phone_contact': 75,
+      'meeting_scheduled': 100,
+      'resume_download': 25,
+      'github_follow': 30,
+      'linkedin_connect': 40
+    };
+    
+    const conversionValue = value || conversionValues[type] || 0;
+    
     this.trackInteraction('conversion', {
       conversion_type: type,
-      conversion_value: value,
+      conversion_value: conversionValue,
       funnel_step: 'conversion',
-      session_id: typeof posthog !== 'undefined' ? posthog.get_session_id() : null
+      session_id: typeof posthog !== 'undefined' ? posthog.get_session_id() : null,
+      engagement_score: this.calculateEngagementScore(),
+      lead_quality: this.calculateLeadQuality(),
+      ...properties
+    });
+    
+    // Track high-value conversions separately
+    if (conversionValue >= 75) {
+      this.trackInteraction('high_value_conversion', {
+        conversion_type: type,
+        conversion_value: conversionValue,
+        engagement_score: this.calculateEngagementScore()
+      });
+    }
+  },
+
+  // Calculate lead quality based on behavior patterns
+  calculateLeadQuality: function() {
+    let quality = 'cold';
+    const score = this.calculateEngagementScore();
+    const projectsViewed = this.userEngagement.projectsViewed.size;
+    
+    if (score >= 50 && projectsViewed >= 3) {
+      quality = 'hot';
+    } else if (score >= 25 && projectsViewed >= 2) {
+      quality = 'warm';
+    } else if (score >= 10) {
+      quality = 'lukewarm';
+    }
+    
+    return quality;
+  },
+
+  // Track micro-conversions (smaller engagement milestones)
+  trackMicroConversion: function(type, properties = {}) {
+    this.trackInteraction('micro_conversion', {
+      micro_conversion_type: type,
+      engagement_score: this.calculateEngagementScore(),
+      ...properties
+    });
+  },
+
+  // Track content performance
+  trackContentPerformance: function(contentType, contentId, action, properties = {}) {
+    this.trackInteraction('content_interaction', {
+      content_type: contentType,
+      content_id: contentId,
+      action: action,
+      engagement_score: this.calculateEngagementScore(),
+      ...properties
+    });
+  },
+
+  // Track funnel drop-offs
+  trackFunnelDropoff: function(funnelStep, timeSpent, lastAction) {
+    this.trackInteraction('funnel_dropoff', {
+      funnel_step: funnelStep,
+      time_spent_seconds: timeSpent,
+      last_action: lastAction,
+      engagement_score: this.calculateEngagementScore(),
+      projects_viewed: this.userEngagement.projectsViewed.size
+    });
+  },
+
+  // Feature flags and A/B testing
+  getFeatureFlag: function(flagName, defaultValue = false) {
+    if (typeof posthog !== 'undefined' && posthog.getFeatureFlag) {
+      return posthog.getFeatureFlag(flagName) || defaultValue;
+    }
+    return defaultValue;
+  },
+
+  // Track feature flag exposure
+  trackFeatureFlagExposure: function(flagName, flagValue, properties = {}) {
+    this.trackInteraction('feature_flag_exposure', {
+      flag_name: flagName,
+      flag_value: flagValue,
+      ...properties
+    });
+  },
+
+  // A/B test different CTAs
+  getOptimalCTA: function() {
+    const ctaTest = this.getFeatureFlag('cta_test_variant', 'control');
+    
+    if (ctaTest === 'variant_a') {
+      return {
+        text: '🚀 Let\'s Build Something Amazing',
+        style: 'primary',
+        variant: 'a'
+      };
+    } else if (ctaTest === 'variant_b') {
+      return {
+        text: '💡 Ready to Scale with AI?',
+        style: 'secondary',
+        variant: 'b'
+      };
+    } else {
+      return {
+        text: '📞 Schedule a meeting',
+        style: 'default',
+        variant: 'control'
+      };
+    }
+  },
+
+  // Track A/B test conversions
+  trackABTestConversion: function(testName, variant, conversionType) {
+    this.trackInteraction('ab_test_conversion', {
+      test_name: testName,
+      variant: variant,
+      conversion_type: conversionType,
+      engagement_score: this.calculateEngagementScore()
     });
   }
 };
