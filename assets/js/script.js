@@ -4,13 +4,18 @@
 const posthogTracking = {
   // Track user interactions
   trackInteraction: function(eventName, properties = {}) {
-    if (typeof posthog !== 'undefined') {
-      posthog.capture(eventName, {
-        ...properties,
-        timestamp: new Date().toISOString(),
-        page_url: window.location.href,
-        page_title: document.title
-      });
+    if (typeof posthog !== 'undefined' && posthog.capture && !posthog.has_opted_out_capturing()) {
+      try {
+        posthog.capture(eventName, {
+          ...properties,
+          timestamp: new Date().toISOString(),
+          page_url: window.location.href,
+          page_title: document.title
+        });
+      } catch (error) {
+        // Silently handle tracking errors
+        return;
+      }
     }
   },
 
