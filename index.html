@@ -20,31 +20,43 @@
           api_host: 'https://us.i.posthog.com',
           defaults: '2025-05-24',
           person_profiles: 'identified_only', // Create profiles only for identified users
-          capture_pageview: false, // Disable automatic pageview
-          capture_pageleave: false, // Disable automatic pageleave
-          autocapture: false, // Disable autocapture
+          capture_pageview: true, // Enable automatic pageview for funnels
+          capture_pageleave: true, // Enable page leave tracking
+          autocapture: true, // Enable autocapture for comprehensive tracking
           debug: false, // Disable debug to reduce noise
           disable_session_recording: false, // Enable session recording
           disable_persistence: false, // Enable local storage for better performance
           disable_surveys: true, // Disable surveys
-          disable_toolbar: true, // Disable toolbar
+          disable_toolbar: false, // Enable toolbar for debugging
           session_recording: {
             maskAllInputs: false,
             maskInputOptions: {
               password: true
-            }
+            },
+            recordCrossOriginIframes: false,
+            recordCanvas: false,
+            collectFonts: false
           },
           loaded: function(posthog) {
             console.log('PostHog loaded successfully!');
             console.log('PostHog distinct ID:', posthog.get_distinct_id());
-            // Track initial page load manually
+            console.log('Session ID:', posthog.get_session_id());
+            
+            // Track initial page load manually with funnel context
             posthog.capture('portfolio_page_loaded', {
               page_title: document.title,
               page_url: window.location.href,
               referrer: document.referrer,
               user_agent: navigator.userAgent,
-              timestamp: new Date().toISOString()
+              timestamp: new Date().toISOString(),
+              funnel_step: 'landing',
+              session_id: posthog.get_session_id()
             });
+            
+            // Start session recording explicitly
+            if (posthog.sessionRecordingStarted) {
+              console.log('Session recording started');
+            }
           },
           on_xhr_error: function(failedRequest) {
             console.warn('PostHog blocked - analytics disabled');
@@ -94,7 +106,7 @@
                      </div>
                      <div class="contact-info">
                         <p class="contact-title">Email</p>
-                        <a href="mailto:axaysd@gmail.com" class="contact-link" onclick="posthogTracking.trackContactInteraction('email_click', {email: 'axaysd@gmail.com'})">axaysd@gmail.com</a>
+                        <a href="mailto:axaysd@gmail.com" class="contact-link" onclick="posthogTracking.trackContactInteraction('email_click', {email: 'axaysd@gmail.com'}); posthogTracking.trackConversion('email_contact', 'sidebar');">axaysd@gmail.com</a>
                      </div>
                   </li>
                   <li class="contact-item">
@@ -103,7 +115,7 @@
                      </div>
                      <div class="contact-info">
                         <p class="contact-title">Phone</p>
-                        <a href="tel:+16284682958" class="contact-link" onclick="posthogTracking.trackContactInteraction('phone_click', {phone: '+16284682958'})">+1 (628) 468-2958</a>
+                        <a href="tel:+16284682958" class="contact-link" onclick="posthogTracking.trackContactInteraction('phone_click', {phone: '+16284682958'}); posthogTracking.trackConversion('phone_contact', 'sidebar');">+1 (628) 468-2958</a>
                      </div>
                   </li>
                   <li class="contact-item">
@@ -149,7 +161,7 @@
 🔹 AI Product Consulting – Design & Build intuitive, cost-effective AI-powered features, MVPs, & end-to-end solutions.<br>
 🔹 Data Solutions – Build pipelines for diagnostics, prediction, and real-time analytics.<br>
 <br>
-<span class="inline-contact">Need AI expertise? Let's talk!<br> <a href="https://calendly.com/axaysd" target="_blank" onclick="posthogTracking.trackContactInteraction('calendly_click', {url: 'https://calendly.com/axaysd'})">📞 Schedule a meeting</a> | <a href="mailto:axaysd@gmail.com" onclick="posthogTracking.trackContactInteraction('email_click', {email: 'axaysd@gmail.com', context: 'about_section'})">✉️ Email me</a></span>
+<span class="inline-contact">Need AI expertise? Let's talk!<br> <a href="https://calendly.com/axaysd" target="_blank" onclick="posthogTracking.trackContactInteraction('calendly_click', {url: 'https://calendly.com/axaysd'}); posthogTracking.trackConversion('meeting_scheduled', 'about_section');">📞 Schedule a meeting</a> | <a href="mailto:axaysd@gmail.com" onclick="posthogTracking.trackContactInteraction('email_click', {email: 'axaysd@gmail.com', context: 'about_section'}); posthogTracking.trackConversion('email_contact', 'about_section');">✉️ Email me</a></span>
                   </p>
                </section>
                <section class="service">
@@ -920,6 +932,48 @@
             
             if (isExternal) {
               posthogTracking.trackExternalLink(url, target.textContent || target.innerText, 'general_click');
+              
+              // Track funnel progression for external links
+              if (url.includes('github.com')) {
+                posthogTracking.trackFunnelStep('github_click', {url: url});
+              } else if (url.includes('calendly.com')) {
+                posthogTracking.trackFunnelStep('meeting_scheduled', {url: url});
+              } else if (url.includes('mailto:')) {
+                posthogTracking.trackFunnelStep('email_contact', {url: url});
+              } else {
+                posthogTracking.trackFunnelStep('external_link', {url: url});
+              }
+            }
+          }
+        });
+        
+        // Track portfolio project interactions with funnel context
+        document.addEventListener('click', function(e) {
+          const projectItem = e.target.closest('.project-item');
+          if (projectItem) {
+            const projectTitle = projectItem.querySelector('.project-title')?.textContent;
+            const projectCategory = projectItem.getAttribute('data-category');
+            const projectType = projectItem.getAttribute('data-project-type');
+            
+            if (projectTitle) {
+              posthogTracking.trackPortfolioEngagement('project_viewed', {
+                project_title: projectTitle,
+                project_category: projectCategory,
+                project_type: projectType
+              });
+            }
+          }
+        });
+        
+        // Track service item clicks with funnel context
+        document.addEventListener('click', function(e) {
+          const serviceItem = e.target.closest('.service-item');
+          if (serviceItem) {
+            const serviceTitle = serviceItem.querySelector('.service-item-title')?.textContent;
+            if (serviceTitle) {
+              posthogTracking.trackFunnelStep('service_exploration', {
+                service_title: serviceTitle
+              });
             }
           }
         });

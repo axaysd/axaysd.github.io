@@ -59,7 +59,37 @@ const posthogTracking = {
   trackFilterUsage: function(category, subfilter) {
     this.trackInteraction('filter_used', {
       category: category,
-      subfilter: subfilter
+      subfilter: subfilter,
+      funnel_step: 'portfolio_exploration'
+    });
+  },
+
+  // Track funnel progression
+  trackFunnelStep: function(step, properties = {}) {
+    this.trackInteraction('funnel_step', {
+      funnel_step: step,
+      session_id: typeof posthog !== 'undefined' ? posthog.get_session_id() : null,
+      ...properties
+    });
+  },
+
+  // Track portfolio engagement
+  trackPortfolioEngagement: function(action, details = {}) {
+    this.trackInteraction('portfolio_engagement', {
+      action: action,
+      funnel_step: 'portfolio_interaction',
+      session_id: typeof posthog !== 'undefined' ? posthog.get_session_id() : null,
+      ...details
+    });
+  },
+
+  // Track conversion events
+  trackConversion: function(type, value = null) {
+    this.trackInteraction('conversion', {
+      conversion_type: type,
+      conversion_value: value,
+      funnel_step: 'conversion',
+      session_id: typeof posthog !== 'undefined' ? posthog.get_session_id() : null
     });
   }
 };
@@ -187,6 +217,12 @@ for (let i = 0; i < navigationLinks.length; i++) {
           targetPage,
           'navigation_click'
         );
+        
+        // Track funnel progression
+        posthogTracking.trackFunnelStep('navigation', {
+          from_page: currentActivePage ? currentActivePage.dataset.page : 'unknown',
+          to_page: targetPage
+        });
       } else {
         pages[i].classList.remove('active');
         navigationLinks[i].classList.remove('active');
