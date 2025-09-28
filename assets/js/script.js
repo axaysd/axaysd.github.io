@@ -1,5 +1,64 @@
 'use strict';
 
+// PostHog Analytics Helper Functions
+const posthogTracking = {
+  // Track user interactions
+  trackInteraction: function(eventName, properties = {}) {
+    if (typeof posthog !== 'undefined') {
+      posthog.capture(eventName, {
+        ...properties,
+        timestamp: new Date().toISOString(),
+        page_url: window.location.href,
+        page_title: document.title
+      });
+    }
+  },
+
+  // Track navigation events
+  trackNavigation: function(fromPage, toPage, method = 'click') {
+    this.trackInteraction('navigation', {
+      from_page: fromPage,
+      to_page: toPage,
+      navigation_method: method
+    });
+  },
+
+  // Track portfolio interactions
+  trackPortfolioInteraction: function(action, projectTitle, projectCategory, projectType) {
+    this.trackInteraction('portfolio_interaction', {
+      action: action,
+      project_title: projectTitle,
+      project_category: projectCategory,
+      project_type: projectType
+    });
+  },
+
+  // Track external link clicks
+  trackExternalLink: function(url, linkText, context) {
+    this.trackInteraction('external_link_click', {
+      url: url,
+      link_text: linkText,
+      context: context
+    });
+  },
+
+  // Track contact interactions
+  trackContactInteraction: function(action, details = {}) {
+    this.trackInteraction('contact_interaction', {
+      action: action,
+      ...details
+    });
+  },
+
+  // Track filter usage
+  trackFilterUsage: function(category, subfilter) {
+    this.trackInteraction('filter_used', {
+      category: category,
+      subfilter: subfilter
+    });
+  }
+};
+
 // element toggle function
 const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
 
@@ -8,7 +67,12 @@ const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
 // sidebar toggle functionality for mobile
-sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
+sidebarBtn.addEventListener("click", function () { 
+  elementToggleFunc(sidebar);
+  posthogTracking.trackInteraction('sidebar_toggle', {
+    sidebar_state: sidebar.classList.contains('active') ? 'opened' : 'closed'
+  });
+});
 
 // testimonials variables
 const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
@@ -103,11 +167,21 @@ const pages = document.querySelectorAll("[data-page]");
 // add event to all nav link
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
+    const currentActivePage = document.querySelector('[data-page].active');
+    const targetPage = this.innerHTML.toLowerCase();
+    
     for (let i = 0; i < pages.length; i++) {
       if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
         pages[i].classList.add("active");
         navigationLinks[i].classList.add("active");
         window.scrollTo(0, 0);
+        
+        // Track navigation
+        posthogTracking.trackNavigation(
+          currentActivePage ? currentActivePage.dataset.page : 'unknown',
+          targetPage,
+          'navigation_click'
+        );
       } else {
         pages[i].classList.remove('active');
         navigationLinks[i].classList.remove('active');
@@ -121,6 +195,26 @@ const serviceItems = document.querySelectorAll('.service-item');
 
 serviceItems.forEach(item => {
   item.addEventListener('click', () => {
+    const currentActivePage = document.querySelector('[data-page].active');
+    const serviceTitle = item.querySelector('.service-item-title').textContent;
+    let targetCategory = 'unknown';
+    
+    // Determine target category
+    if (serviceTitle.includes('Data')) {
+      targetCategory = 'data analytics';
+    } else if (serviceTitle.includes('Product')) {
+      targetCategory = 'product management';
+    } else if (serviceTitle.includes('AI')) {
+      targetCategory = 'ai';
+    }
+    
+    // Track service item click
+    posthogTracking.trackInteraction('service_item_click', {
+      service_title: serviceTitle,
+      target_category: targetCategory,
+      from_page: currentActivePage ? currentActivePage.dataset.page : 'unknown'
+    });
+    
     // Deactivate all pages
     pages.forEach(page => {
       page.classList.remove('active');
@@ -145,11 +239,11 @@ serviceItems.forEach(item => {
     window.scrollTo(0, 0);
 
     // Apply the corresponding filter using enhanced function
-    if (item.querySelector('.service-item-title').textContent.includes('Data')) {
+    if (serviceTitle.includes('Data')) {
       enhancedFilterFunc('data analytics', 'all');
-    } else if (item.querySelector('.service-item-title').textContent.includes('Product')) {
+    } else if (serviceTitle.includes('Product')) {
       enhancedFilterFunc('product management', 'all');
-    } else if (item.querySelector('.service-item-title').textContent.includes('AI')) {
+    } else if (serviceTitle.includes('AI')) {
       enhancedFilterFunc('ai', 'all');
     }
   });
@@ -215,6 +309,9 @@ document.addEventListener("DOMContentLoaded", function() {
   enhancedFilterFunc = function(category, subfilter = "all") {
     let hasVisibleProjects = false;
     
+    // Track filter usage
+    posthogTracking.trackFilterUsage(category, subfilter);
+    
     projects.forEach(project => {
       const projectCategory = project.getAttribute("data-category");
       const projectType = project.getAttribute("data-project-type");
@@ -273,6 +370,27 @@ document.addEventListener("DOMContentLoaded", function() {
   
   // Update project counts dynamically
   updateProjectCounts();
+
+  // Add tracking for all portfolio project clicks
+  projects.forEach(project => {
+    const projectLink = project.querySelector('a');
+    if (projectLink) {
+      projectLink.addEventListener('click', function(e) {
+        const projectTitle = project.querySelector('.project-title').textContent;
+        const projectCategory = project.getAttribute('data-category');
+        const projectType = project.getAttribute('data-project-type');
+        const projectUrl = this.href;
+        
+        // Track portfolio project click
+        posthogTracking.trackPortfolioInteraction('project_clicked', projectTitle, projectCategory, projectType);
+        
+        // Track external link if it's external
+        if (projectUrl && (projectUrl.startsWith('http') && !projectUrl.includes(window.location.hostname))) {
+          posthogTracking.trackExternalLink(projectUrl, projectTitle, 'portfolio_project');
+        }
+      });
+    }
+  });
 
   // Subfilter functionality for all three categories
   const productSubfilters = document.getElementById("product-subfilters");

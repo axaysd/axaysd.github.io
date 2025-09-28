@@ -10,6 +10,35 @@
       
         gtag('config', 'G-0QG85VVV22');
       </script>
+      
+      <!-- PostHog Analytics -->
+      <script>
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]);t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.full.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        
+        // Initialize PostHog with your project API key
+        posthog.init('phc_NABQDICX4C4TP7I2j3FsbeOvJhc98hnLWgSo0WEfz2K', {
+          api_host: 'https://app.posthog.com',
+          capture_pageview: true,
+          capture_pageleave: true,
+          autocapture: true,
+          session_recording: {
+            maskAllInputs: false,
+            maskInputOptions: {
+              password: true
+            }
+          },
+          loaded: function(posthog) {
+            // Track initial page load
+            posthog.capture('portfolio_page_loaded', {
+              page_title: document.title,
+              page_url: window.location.href,
+              referrer: document.referrer,
+              user_agent: navigator.userAgent,
+              timestamp: new Date().toISOString()
+            });
+          }
+        });
+      </script>
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,7 +79,7 @@
                      </div>
                      <div class="contact-info">
                         <p class="contact-title">Email</p>
-                        <a href="mailto:axaysd@gmail.com" class="contact-link">axaysd@gmail.com</a>
+                        <a href="mailto:axaysd@gmail.com" class="contact-link" onclick="posthogTracking.trackContactInteraction('email_click', {email: 'axaysd@gmail.com'})">axaysd@gmail.com</a>
                      </div>
                   </li>
                   <li class="contact-item">
@@ -59,7 +88,7 @@
                      </div>
                      <div class="contact-info">
                         <p class="contact-title">Phone</p>
-                        <a href="tel:+16284682958" class="contact-link">+1 (628) 468-2958</a>
+                        <a href="tel:+16284682958" class="contact-link" onclick="posthogTracking.trackContactInteraction('phone_click', {phone: '+16284682958'})">+1 (628) 468-2958</a>
                      </div>
                   </li>
                   <li class="contact-item">
@@ -105,7 +134,7 @@
 🔹 AI Product Consulting – Design & Build intuitive, cost-effective AI-powered features, MVPs, & end-to-end solutions.<br>
 🔹 Data Solutions – Build pipelines for diagnostics, prediction, and real-time analytics.<br>
 <br>
-<span class="inline-contact">Need AI expertise? Let's talk!<br> <a href="https://calendly.com/axaysd" target="_blank">📞 Schedule a meeting</a> | <a href="mailto:axaysd@gmail.com">✉️ Email me</a></span>
+<span class="inline-contact">Need AI expertise? Let's talk!<br> <a href="https://calendly.com/axaysd" target="_blank" onclick="posthogTracking.trackContactInteraction('calendly_click', {url: 'https://calendly.com/axaysd'})">📞 Schedule a meeting</a> | <a href="mailto:axaysd@gmail.com" onclick="posthogTracking.trackContactInteraction('email_click', {email: 'axaysd@gmail.com', context: 'about_section'})">✉️ Email me</a></span>
                   </p>
                </section>
                <section class="service">
@@ -798,5 +827,87 @@
       <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
       <co-pilot platform-id="d4b78280-c84c-45cb-a2a9-39976d1bde97" user-id="352b9f7a-eb89-4574-b787-5263bbebe385" chatbot-id="012be872-935c-4849-ae0c-40ed0d550a30" is-local="false"><a href="https://www.chatsimple.ai/?utm_source=widget&utm_medium=referral">copilot</a></co-pilot>
       <script src="https://cdn.chatsimple.ai/ai-loader.js" defer></script>
+      
+      <!-- Additional PostHog Tracking -->
+      <script>
+        // Track scroll depth
+        let maxScrollDepth = 0;
+        let scrollDepthTracked = false;
+        
+        window.addEventListener('scroll', function() {
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          const windowHeight = window.innerHeight;
+          const documentHeight = document.documentElement.scrollHeight;
+          const scrollDepth = Math.round((scrollTop + windowHeight) / documentHeight * 100);
+          
+          if (scrollDepth > maxScrollDepth) {
+            maxScrollDepth = scrollDepth;
+            
+            // Track milestone scroll depths
+            if (scrollDepth >= 25 && scrollDepth < 50 && !scrollDepthTracked) {
+              posthogTracking.trackInteraction('scroll_depth', {depth: 25});
+              scrollDepthTracked = true;
+            } else if (scrollDepth >= 50 && scrollDepth < 75) {
+              posthogTracking.trackInteraction('scroll_depth', {depth: 50});
+            } else if (scrollDepth >= 75 && scrollDepth < 90) {
+              posthogTracking.trackInteraction('scroll_depth', {depth: 75});
+            } else if (scrollDepth >= 90) {
+              posthogTracking.trackInteraction('scroll_depth', {depth: 90});
+            }
+          }
+        });
+        
+        // Track time on page
+        let startTime = Date.now();
+        let timeOnPageTracked = false;
+        
+        setInterval(function() {
+          const timeOnPage = Math.round((Date.now() - startTime) / 1000);
+          
+          // Track milestone time on page
+          if (timeOnPage >= 30 && timeOnPage < 60 && !timeOnPageTracked) {
+            posthogTracking.trackInteraction('time_on_page', {seconds: 30});
+            timeOnPageTracked = true;
+          } else if (timeOnPage >= 60 && timeOnPage < 120) {
+            posthogTracking.trackInteraction('time_on_page', {seconds: 60});
+          } else if (timeOnPage >= 120) {
+            posthogTracking.trackInteraction('time_on_page', {seconds: 120});
+          }
+        }, 10000); // Check every 10 seconds
+        
+        // Track page visibility changes
+        document.addEventListener('visibilitychange', function() {
+          if (document.hidden) {
+            posthogTracking.trackInteraction('page_hidden', {
+              time_on_page: Math.round((Date.now() - startTime) / 1000)
+            });
+          } else {
+            posthogTracking.trackInteraction('page_visible', {
+              time_on_page: Math.round((Date.now() - startTime) / 1000)
+            });
+          }
+        });
+        
+        // Track before page unload
+        window.addEventListener('beforeunload', function() {
+          posthogTracking.trackInteraction('page_unload', {
+            time_on_page: Math.round((Date.now() - startTime) / 1000),
+            max_scroll_depth: maxScrollDepth
+          });
+        });
+        
+        // Track clicks on external links (catch-all)
+        document.addEventListener('click', function(e) {
+          const target = e.target.closest('a');
+          if (target && target.href) {
+            const url = target.href;
+            const isExternal = url.startsWith('http') && !url.includes(window.location.hostname);
+            
+            if (isExternal) {
+              posthogTracking.trackExternalLink(url, target.textContent || target.innerText, 'general_click');
+            }
+          }
+        });
+      </script>
    </body>
 </html>
