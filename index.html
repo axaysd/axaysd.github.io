@@ -23,7 +23,7 @@
           capture_pageview: true, // Enable automatic pageview for funnels
           capture_pageleave: true, // Enable page leave tracking
           autocapture: true, // Enable autocapture for comprehensive tracking
-          debug: false, // Disable debug to reduce noise
+          debug: true, // Enable debug to troubleshoot
           disable_session_recording: false, // Enable session recording
           disable_persistence: false, // Enable local storage for better performance
           disable_surveys: true, // Disable surveys
@@ -977,6 +977,24 @@
             }
           }
         });
+        
+        // DEBUG: Test PostHog functionality
+        console.log('PostHog loaded:', typeof posthog !== 'undefined');
+        console.log('PostHog distinct ID:', typeof posthog !== 'undefined' ? posthog.get_distinct_id() : 'Not available');
+        
+        // Test basic capture after 3 seconds
+        setTimeout(function() {
+          if (typeof posthog !== 'undefined') {
+            posthog.capture('test_event', {
+              test_property: 'test_value',
+              timestamp: new Date().toISOString(),
+              page_url: window.location.href
+            });
+            console.log('Test event sent to PostHog');
+          } else {
+            console.error('PostHog not available');
+          }
+        }, 3000);
       </script>
    </body>
 </html>
