@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        // Resume file redirects
+        const resumeRedirects = {
+            'resume_pm_ai.pdf': './file_assets/assets/resumes/resume_pm_ai.pdf',
+            'resume_pm.pdf': './file_assets/assets/resumes/resume_pm.pdf',
+            'resume_pm_data.pdf': './file_assets/assets/resumes/resume_pm_data.pdf',
+            'resume_pmm.pdf': './file_assets/assets/resumes/resume_pmm.pdf',
+            'resume_PPA.pdf': './file_assets/assets/resumes/resume_PPA.pdf',
+            'resume_PA.pdf': './file_assets/assets/resumes/resume_PA.pdf',
+            'resume_ixl.pdf': './file_assets/assets/resumes/resume_ixl.pdf',
+            'resume_genai_pa.pdf': './file_assets/assets/resumes/resume_genai_pa.pdf',
+            'resume_ds.pdf': './file_assets/assets/resumes/resume_ds.pdf',
+            'resume_ba_data.pdf': './file_assets/assets/resumes/resume_ba_data.pdf',
+            'Postman_FDE_CV.pdf': './file_assets/assets/resumes/Postman_FDE_CV.pdf',
+            'pm_payments.pdf': './file_assets/assets/resumes/pm_payments.pdf',
+            'cv_uc.pdf': './file_assets/assets/resumes/cv_uc.pdf',
+            'akshay_nextiva_resume.pdf': './file_assets/assets/resumes/akshay_nextiva_resume.pdf',
+            'Akshay_Danthi_resume_FDE2.pdf': './file_assets/assets/resumes/Akshay_Danthi_resume_FDE2.pdf',
+            'akshay_ai_po.pdf': './file_assets/assets/resumes/akshay_ai_po.pdf'
+        };
+        
+        // Get the requested file from the URL
+        const path = window.location.pathname;
+        const fileName = path.split('/').pop();
+        
+        // Check if it's a resume file we need to redirect
+        if (resumeRedirects[fileName]) {
+            window.location.replace(resumeRedirects[fileName]);
+        } else {
+            // For other 404s, redirect to main page
+            window.location.replace('./');
+        }
+    </script>
+</head>
+<body>
+    <div style="text-align: center; margin-top: 50px; font-family: Arial, sans-serif;">
+        <h2>Redirecting...</h2>
+        <p>If you are not redirected automatically, <a href="./">go to homepage</a></p>
+    </div>
+</body>
+</html>
