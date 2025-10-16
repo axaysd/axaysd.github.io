@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
     <script>
-        // Resume file redirects
-        const resumeRedirects = {
+        // Resume and cover letter file redirects
+        const fileRedirects = {
+            // Resume files
             'resume_pm_ai.pdf': './file_assets/assets/resumes/resume_pm_ai.pdf',
             'resume_pm.pdf': './file_assets/assets/resumes/resume_pm.pdf',
             'resume_pm_data.pdf': './file_assets/assets/resumes/resume_pm_data.pdf',
@@ -22,16 +23,20 @@
             'cv_uc.pdf': './file_assets/assets/resumes/cv_uc.pdf',
             'akshay_nextiva_resume.pdf': './file_assets/assets/resumes/akshay_nextiva_resume.pdf',
             'Akshay_Danthi_resume_FDE2.pdf': './file_assets/assets/resumes/Akshay_Danthi_resume_FDE2.pdf',
-            'akshay_ai_po.pdf': './file_assets/assets/resumes/akshay_ai_po.pdf'
+            'akshay_ai_po.pdf': './file_assets/assets/resumes/akshay_ai_po.pdf',
+            // Cover letter files
+            'ad_cv_1.pdf': './file_assets/assets/cover-letters/ad_cv_1.pdf',
+            'cl_ai_pm.docx': './file_assets/assets/cover-letters/cl_ai_pm.docx',
+            'cl_pm.docx': './file_assets/assets/cover-letters/cl_pm.docx'
         };
         
         // Get the requested file from the URL
         const path = window.location.pathname;
         const fileName = path.split('/').pop();
         
-        // Check if it's a resume file we need to redirect
-        if (resumeRedirects[fileName]) {
-            window.location.replace(resumeRedirects[fileName]);
+        // Check if it's a file we need to redirect
+        if (fileRedirects[fileName]) {
+            window.location.replace(fileRedirects[fileName]);
         } else {
             // For other 404s, redirect to main page
             window.location.replace('./');

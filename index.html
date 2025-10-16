@@ -917,6 +917,44 @@
           // Expose the function globally for manual testing
           window.checkResumeRedirect = checkAndRedirectResume;
         })();
+
+        // Cover letter file redirect functionality
+        (function() {
+          // List of cover letter files and their correct paths
+          const coverLetterFiles = {
+            'ad_cv_1.pdf': './file_assets/assets/cover-letters/ad_cv_1.pdf',
+            'cl_ai_pm.docx': './file_assets/assets/cover-letters/cl_ai_pm.docx',
+            'cl_pm.docx': './file_assets/assets/cover-letters/cl_pm.docx'
+          };
+          
+          // Function to check and redirect cover letter files
+          function checkAndRedirectCoverLetter() {
+            const currentPath = window.location.pathname;
+            const fileName = currentPath.split('/').pop();
+            
+            // Check if the current URL matches any cover letter file
+            if (coverLetterFiles[fileName]) {
+              console.log(`Redirecting ${fileName} to ${coverLetterFiles[fileName]}`);
+              window.location.replace(coverLetterFiles[fileName]);
+              return true;
+            }
+            
+            return false;
+          }
+          
+          // Run the check when the page loads
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', checkAndRedirectCoverLetter);
+          } else {
+            checkAndRedirectCoverLetter();
+          }
+          
+          // Also check on hash change (for SPA-like behavior)
+          window.addEventListener('hashchange', checkAndRedirectCoverLetter);
+          
+          // Expose the function globally for manual testing
+          window.checkCoverLetterRedirect = checkAndRedirectCoverLetter;
+        })();
       </script>
       <!-- ionicon link -->
       <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
