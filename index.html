@@ -23,8 +23,12 @@
          person_profiles: 'identified_only', // Create profiles only for identified users
          capture_pageview: true, // Enable automatic pageview for funnels
          capture_pageleave: true, // Enable page leave tracking
-         autocapture: true, // Enable autocapture for comprehensive tracking
-         debug: true, // Enable debug to troubleshoot
+         autocapture: {
+            capture_copied_text: true, // Track when users copy text from your site
+            css_selector_allowlist: ['[data-ph-capture]'], // Explicitly capture elements with this attribute
+         },
+         scroll_root_selector: ['main', 'body'], // Track scroll depth on these elements
+         debug: false, // Disabled for production (set to true for troubleshooting)
          disable_session_recording: false, // Enable session recording
          disable_persistence: false, // Enable local storage for better performance
          disable_surveys: true, // Disable surveys
@@ -1135,6 +1139,61 @@
             lead_quality: posthogTracking.calculateLeadQuality()
          });
       });
+
+      // ========================================
+      // ERROR TRACKING - Capture JavaScript Errors
+      // ========================================
+
+      // Track uncaught JavaScript errors
+      window.addEventListener('error', function (event) {
+         if (typeof posthog !== 'undefined' && posthog.captureException) {
+            posthog.captureException(event.error || new Error(event.message), {
+               source_file: event.filename,
+               line_number: event.lineno,
+               column_number: event.colno,
+               error_message: event.message,
+               context: 'global_error_handler',
+               page_url: window.location.href,
+               user_agent: navigator.userAgent,
+               engagement_score: posthogTracking.calculateEngagementScore(),
+               session_id: posthog.get_session_id ? posthog.get_session_id() : null
+            });
+         }
+         // Don't prevent default error handling
+         return false;
+      });
+
+      // Track unhandled promise rejections
+      window.addEventListener('unhandledrejection', function (event) {
+         if (typeof posthog !== 'undefined' && posthog.captureException) {
+            const error = event.reason instanceof Error
+               ? event.reason
+               : new Error(String(event.reason));
+
+            posthog.captureException(error, {
+               type: 'unhandled_promise_rejection',
+               context: 'promise_rejection_handler',
+               promise_reason: String(event.reason),
+               page_url: window.location.href,
+               user_agent: navigator.userAgent,
+               engagement_score: posthogTracking.calculateEngagementScore(),
+               session_id: posthog.get_session_id ? posthog.get_session_id() : null
+            });
+         }
+      });
+
+      // Helper function to manually capture errors in try-catch blocks
+      window.capturePostHogError = function (error, additionalContext = {}) {
+         if (typeof posthog !== 'undefined' && posthog.captureException) {
+            posthog.captureException(error, {
+               context: 'manual_capture',
+               page_url: window.location.href,
+               engagement_score: posthogTracking.calculateEngagementScore(),
+               session_id: posthog.get_session_id ? posthog.get_session_id() : null,
+               ...additionalContext
+            });
+         }
+      };
 
       // Track clicks on external links with enhanced conversion tracking
       document.addEventListener('click', function (e) {
