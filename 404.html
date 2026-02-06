@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,32 +9,32 @@
         // Resume and cover letter file redirects
         const fileRedirects = {
             // Resume files
-            'resume_pm_ai.pdf': './file_assets/assets/resumes/resume_pm_ai.pdf',
-            'resume_pm.pdf': './file_assets/assets/resumes/resume_pm.pdf',
-            'resume_pm_data.pdf': './file_assets/assets/resumes/resume_pm_data.pdf',
-            'resume_pmm.pdf': './file_assets/assets/resumes/resume_pmm.pdf',
-            'resume_PPA.pdf': './file_assets/assets/resumes/resume_PPA.pdf',
-            'resume_PA.pdf': './file_assets/assets/resumes/resume_PA.pdf',
-            'resume_ixl.pdf': './file_assets/assets/resumes/resume_ixl.pdf',
-            'resume_genai_pa.pdf': './file_assets/assets/resumes/resume_genai_pa.pdf',
-            'resume_ds.pdf': './file_assets/assets/resumes/resume_ds.pdf',
-            'resume_ba_data.pdf': './file_assets/assets/resumes/resume_ba_data.pdf',
-            'Postman_FDE_CV.pdf': './file_assets/assets/resumes/Postman_FDE_CV.pdf',
-            'pm_payments.pdf': './file_assets/assets/resumes/pm_payments.pdf',
-            'cv_uc.pdf': './file_assets/assets/resumes/cv_uc.pdf',
-            'akshay_nextiva_resume.pdf': './file_assets/assets/resumes/akshay_nextiva_resume.pdf',
-            'Akshay_Danthi_resume_FDE2.pdf': './file_assets/assets/resumes/Akshay_Danthi_resume_FDE2.pdf',
-            'akshay_ai_po.pdf': './file_assets/assets/resumes/akshay_ai_po.pdf',
+            'resume_pm_ai.pdf': './assets/resumes/resume_pm_ai.pdf',
+            'resume_pm.pdf': './assets/resumes/resume_pm.pdf',
+            'resume_pm_data.pdf': './assets/resumes/resume_pm_data.pdf',
+            'resume_pmm.pdf': './assets/resumes/resume_pmm.pdf',
+            'resume_PPA.pdf': './assets/resumes/resume_PPA.pdf',
+            'resume_PA.pdf': './assets/resumes/resume_PA.pdf',
+            'resume_ixl.pdf': './assets/resumes/resume_ixl.pdf',
+            'resume_genai_pa.pdf': './assets/resumes/resume_genai_pa.pdf',
+            'resume_ds.pdf': './assets/resumes/resume_ds.pdf',
+            'resume_ba_data.pdf': './assets/resumes/resume_ba_data.pdf',
+            'Postman_FDE_CV.pdf': './assets/resumes/Postman_FDE_CV.pdf',
+            'pm_payments.pdf': './assets/resumes/pm_payments.pdf',
+            'cv_uc.pdf': './assets/resumes/cv_uc.pdf',
+            'akshay_nextiva_resume.pdf': './assets/resumes/akshay_nextiva_resume.pdf',
+            'Akshay_Danthi_resume_FDE2.pdf': './assets/resumes/Akshay_Danthi_resume_FDE2.pdf',
+            'akshay_ai_po.pdf': './assets/resumes/akshay_ai_po.pdf',
             // Cover letter files
-            'ad_cv_1.pdf': './file_assets/assets/cover-letters/ad_cv_1.pdf',
-            'cl_ai_pm.docx': './file_assets/assets/cover-letters/cl_ai_pm.docx',
-            'cl_pm.docx': './file_assets/assets/cover-letters/cl_pm.docx'
+            'ad_cv_1.pdf': './assets/cover-letters/ad_cv_1.pdf',
+            'cl_ai_pm.docx': './assets/cover-letters/cl_ai_pm.docx',
+            'cl_pm.docx': './assets/cover-letters/cl_pm.docx'
         };
-        
+
         // Get the requested file from the URL
         const path = window.location.pathname;
         const fileName = path.split('/').pop();
-        
+
         // Check if it's a file we need to redirect
         if (fileRedirects[fileName]) {
             window.location.replace(fileRedirects[fileName]);
@@ -43,10 +44,12 @@
         }
     </script>
 </head>
+
 <body>
     <div style="text-align: center; margin-top: 50px; font-family: Arial, sans-serif;">
         <h2>Redirecting...</h2>
         <p>If you are not redirected automatically, <a href="./">go to homepage</a></p>
     </div>
 </body>
+
 </html>
