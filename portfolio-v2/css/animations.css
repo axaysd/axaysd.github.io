@@ -1,0 +1,216 @@
+/* ============================================
+   KEYFRAME ANIMATIONS
+   ============================================ */
+
+/* Avatar ring rotation */
+@keyframes rotateRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Timeline dot pulse */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(37, 99, 235, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+  }
+}
+
+/* Fade up entrance */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtle float */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Back to top bounce */
+@keyframes bounceUp {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Gradient text shift */
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Confetti fall */
+@keyframes confettiFall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ============================================
+   HERO ENTRANCE ANIMATIONS
+   ============================================ */
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.7s var(--ease) forwards;
+}
+
+.anim-delay-1 { animation-delay: 0.15s; }
+.anim-delay-2 { animation-delay: 0.3s; }
+.anim-delay-3 { animation-delay: 0.45s; }
+.anim-delay-4 { animation-delay: 0.6s; }
+.anim-delay-5 { animation-delay: 0.75s; }
+
+/* ============================================
+   TIMELINE DOT ANIMATION
+   ============================================ */
+.timeline-dot.pulse {
+  animation: pulse 1s ease-out;
+}
+
+/* ============================================
+   SCROLL REVEAL (AOS overrides for consistency)
+   ============================================ */
+[data-aos] {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* ============================================
+   BACK TO TOP
+   ============================================ */
+.back-to-top:hover svg {
+  animation: bounceUp 0.5s ease infinite;
+}
+
+/* ============================================
+   FILTER TRANSITIONS
+   ============================================ */
+.project-card {
+  transition: opacity 0.35s ease, transform 0.35s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.project-card.fade-out {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.project-card.fade-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ============================================
+   STAGGERED GRID REVEAL
+   ============================================ */
+.project-card.stagger-in {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition-delay: var(--stagger-delay, 0ms);
+}
+
+.project-card.stagger-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ============================================
+   EASTER EGG
+   ============================================ */
+.easter-egg-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease;
+}
+
+.easter-egg-content {
+  text-align: center;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.easter-egg-content p:last-child {
+  font-size: 1rem;
+  font-weight: 400;
+  opacity: 0.8;
+  margin-top: 0.5rem;
+}
+
+.confetti-particle {
+  position: absolute;
+  top: -10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  animation: confettiFall 3s ease-out forwards;
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .anim-fade-up {
+    opacity: 1;
+    transform: none;
+  }
+
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .hero-name {
+    animation: none !important;
+    background-size: 100% 100% !important;
+  }
+
+  .project-card.stagger-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .cursor-dot, .cursor-ring, .hero-glow {
+    display: none !important;
+  }
+
+  .confetti-particle {
+    animation: none !important;
+  }
+}

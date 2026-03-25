@@ -1,0 +1,386 @@
+const PROJECTS = [
+  // ===== AI =====
+  {
+    id: "browsermate",
+    title: "BrowserMate: Context-Aware AI Browser Companion",
+    category: "ai",
+    type: "project",
+    description: "Chrome extension that provides intelligent, DOM-aware suggestions for AI agent actions. Understands page structure and content to deliver contextual actions like summarizing, reviewing, and automated interactions.",
+    tech: ["Chrome Extension", "DOM Analysis", "AI Agents"],
+    image: "assets/images/project-20.png",
+    link: "https://github.com/axaysd/BrowserMate",
+    github: "https://github.com/axaysd/BrowserMate",
+    featured: true
+  },
+  {
+    id: "agentic-portfolio",
+    title: "Agentic Model Portfolio Management",
+    category: "ai",
+    type: "project",
+    description: "POC for an investment firm to onboard and manage model portfolios with a chat interface and agentic orchestration using LangGraph and tool calling APIs for fetching financial information, adding to portfolio, rebalancing, etc.",
+    tech: ["LangGraph", "Tool Calling", "Financial APIs"],
+    image: "assets/images/project-19.png",
+    link: "https://github.com/axaysd/portfolioagent5",
+    featured: true
+  },
+  {
+    id: "clinical-intelligence",
+    title: "Clinical Intelligence Agent",
+    category: "ai",
+    type: "project",
+    description: "Production grade Agentic RAG system for healthcare document Q&A with multi-layer safety validation (prompt injection detection, PHI masking, grounding checks), MCP tool integration, automated evaluation pipeline with LLM-as-judge, and full GKE deployment.",
+    tech: ["Vertex AI", "FAISS", "Google ADK", "GKE", "MCP"],
+    image: "assets/images/project-21.png",
+    link: "https://github.com/axaysd/clinical-document-intelligence-agent-2",
+    github: "https://github.com/axaysd/clinical-document-intelligence-agent-2",
+    featured: true
+  },
+  {
+    id: "rapid-test-ai",
+    title: "Rapid Painted Door Test Generator",
+    category: "ai",
+    type: "project",
+    description: "AI agents for rapid hypothesis validation, persona identification, effective messaging generation, and social targeting.",
+    tech: ["Lindy.AI", "AI Agents", "Hackathon"],
+    image: "assets/images/project-18.png",
+    link: "https://youtu.be/yue-gQVgqvY",
+    featured: false
+  },
+  {
+    id: "jobfuse",
+    title: "JobFuse: GenAI-Powered Job Application Assistant",
+    category: "ai",
+    type: "project",
+    description: "Chrome extension for AI-powered job application assistance with LLM cost optimization.",
+    tech: ["LLM APIs", "Chrome Extension", "Manus.IM"],
+    image: "assets/images/project-16.png",
+    link: "https://github.com/axaysd/JobFuse",
+    github: "https://github.com/axaysd/JobFuse",
+    featured: false
+  },
+  {
+    id: "ai-agents-economics",
+    title: "How AI Agents Will Pay Each Other: The Economics and Infrastructure",
+    category: "ai",
+    type: "insight",
+    description: "Market research on the economics and infrastructure of inter-agent payments.",
+    tech: ["Market Research", "AI Economics"],
+    image: "assets/images/project-17.png",
+    link: "https://gelatinous-spandex-35a.notion.site/How-AI-Agents-Will-Pay-Each-Other-The-Economics-and-Infrastructure-25185becd6ad8000b80bfac6bf64f685?source=copy_link",
+    featured: false
+  },
+  {
+    id: "user-persona-finder",
+    title: "User Persona Finder from Reddit",
+    category: "ai",
+    type: "project",
+    description: "Service that creates distinct user personas based on Reddit post content and comments, identifying user needs and pain-points.",
+    tech: ["CrewAI", "Groq API", "Reddit API (PRAW)"],
+    image: "assets/images/project-14.png",
+    link: "https://user-persona-finder.onrender.com/",
+    github: "https://github.com/axaysd/user-persona-finder",
+    featured: false
+  },
+  {
+    id: "nl-data-viz",
+    title: "Data Visualizations from Natural Language Queries (On-Premises)",
+    category: "ai",
+    type: "project",
+    description: "Secure data visualization from plain English queries without data leaving internal systems using a small language model.",
+    tech: ["Llama3.2-1B", "Ollama", "SLM"],
+    image: "assets/images/project-15.png",
+    link: "https://github.com/axaysd/Data-Visualizations-from-Natural-Language-Queries-using-Small-Language-Models-SLMs-",
+    featured: false
+  },
+  {
+    id: "chatrag",
+    title: "ChatRAG: Website Q&A Application",
+    category: "ai",
+    type: "project",
+    description: "RAG application that enables users to chat and get insights from any website URL.",
+    tech: ["RAG", "LangChain", "ChromaDB"],
+    image: "assets/images/project-9.png",
+    link: "https://github.com/axaysd/website-chat-1",
+    liveLink: "https://axaysd-website-chat.streamlit.app",
+    featured: false
+  },
+  {
+    id: "species-nn-ai",
+    title: "Predicting Hominid Species using Neural Network",
+    category: "ai",
+    type: "project",
+    description: "Species classification from genetic markers and physical traits using a fully connected neural network.",
+    tech: ["Python", "scikit-learn", "Keras"],
+    image: "assets/images/evolution.png",
+    link: "https://github.com/axaysd/SpeciesClassificationNN",
+    featured: false
+  },
+  {
+    id: "movie-recommender",
+    title: "Resolving Implicit Selection Bias in Hybrid Recommender Systems",
+    category: "ai",
+    type: "project",
+    description: "Research on resolving implicit selection bias in hybrid recommender systems.",
+    tech: ["NumPy", "scikit-learn", "lightfm"],
+    image: "assets/images/project-10.png",
+    link: "https://github.com/axaysd/Movie-Recommender-system-and-how-to-resolve-bias-in-Hybrid-Recommender-systems",
+    featured: false
+  },
+
+  // ===== DATA ANALYTICS =====
+  {
+    id: "time-series-anomaly",
+    title: "Payments Failure Analysis - Time Series Analysis & Anomaly Detection",
+    category: "data-analytics",
+    type: "project",
+    description: "Time series analysis and anomaly detection for payment failures using Isolation Forest.",
+    tech: ["Python", "pandas", "Matplotlib", "Isolation Forest"],
+    image: "assets/images/project-13.png",
+    link: "https://github.com/axaysd/Time-Series-Analysis-Anomaly-Detection/blob/main/My%20Solution%20(Code).ipynb",
+    featured: false
+  },
+  {
+    id: "sf-crime-prediction",
+    title: "San Francisco Crime Category Prediction: EDA, Visualizations, LGBMClassifier",
+    category: "data-analytics",
+    type: "project",
+    description: "Multi-class crime category prediction with exploratory data analysis and LightGBM.",
+    tech: ["Python", "pandas", "LGBMClassifier"],
+    image: "assets/images/project-11.png",
+    link: "https://github.com/axaysd/SF-Crime-Prediction-EDA-LGBMClassifier",
+    featured: false
+  },
+  {
+    id: "churn-analysis",
+    title: "Churn Analysis on Telecom Customer Data",
+    category: "data-analytics",
+    type: "project",
+    description: "Customer churn prediction and analysis on telecom data.",
+    tech: ["Python", "NumPy", "pandas", "scikit-learn"],
+    image: "assets/images/project-1.jpg",
+    link: "https://github.com/axaysd/Telecom-Customer-Churn-Analysis",
+    featured: false
+  },
+  {
+    id: "species-classification",
+    title: "Predicting Hominid Species from Genetic Markers using Neural Network",
+    category: "data-analytics",
+    type: "project",
+    description: "Species classification from genetic markers and physical traits using a fully connected neural network.",
+    tech: ["Python", "NumPy", "pandas", "scikit-learn", "Keras"],
+    image: "assets/images/evolution.png",
+    link: "https://github.com/axaysd/SpeciesClassificationNN",
+    featured: false
+  },
+  {
+    id: "california-housing",
+    title: "California Housing Price Prediction",
+    category: "data-analytics",
+    type: "project",
+    description: "Housing price prediction model for California real estate market.",
+    tech: ["Python", "NumPy", "pandas", "scikit-learn"],
+    image: "assets/images/project-2.png",
+    link: "https://github.com/axaysd/California_Housing_Price_Prediction",
+    featured: false
+  },
+  {
+    id: "ecommerce-cluster",
+    title: "Cluster Analysis on eCommerce Data",
+    category: "data-analytics",
+    type: "project",
+    description: "Customer segmentation through cluster analysis on eCommerce transaction data.",
+    tech: ["Tableau"],
+    image: "assets/images/project-3.png",
+    link: "https://public.tableau.com/app/profile/akshay.danthi/viz/Cluster_Analysis_17023853801610/e-CommerceCustomerClusterAnalysis",
+    featured: false
+  },
+  {
+    id: "pmi-engagement-tracker",
+    title: "PMI Let's JAM Engagement Tracker Dashboard",
+    category: "data-analytics",
+    type: "deep-dive",
+    description: "Winner of 'Most Practical & Scalable Solution' category. Engagement tracker dashboard for PMI's competition.",
+    tech: ["Tableau", "Product Analytics", "Performance Management"],
+    image: "assets/images/pmi.png",
+    link: "https://public.tableau.com/app/profile/akshay.danthi5949/viz/CareerQuest2024Performance/InterviewClinic",
+    featured: false
+  },
+  {
+    id: "united-airlines-sentiment",
+    title: "Sentiment Analysis on United Airlines Reviews",
+    category: "data-analytics",
+    type: "project",
+    description: "Sentiment analysis on airline reviews from AirlineQuality.com.",
+    tech: ["R", "syuzhet", "tm", "tidyverse", "ggplot2"],
+    image: "assets/images/project-4.png",
+    link: "https://github.com/axaysd/United_Airlines_Baggage_Issues_Analysis",
+    featured: false
+  },
+  {
+    id: "sql-interview",
+    title: "SQL Interview Questions & Solutions",
+    category: "data-analytics",
+    type: "insight",
+    description: "Solutions to SQL interview questions from TryExponent.com and DataInterview.com.",
+    tech: ["SQL"],
+    image: "assets/images/sql_interview.png",
+    link: "https://github.com/axaysd/SQL-interview-questions-practice",
+    featured: false
+  },
+  {
+    id: "nike-kaepernick",
+    title: "Social Media Strategy Analysis on Nike-Kaepernick Controversy",
+    category: "data-analytics",
+    type: "project",
+    description: "Social media strategy analysis examining the Nike-Kaepernick controversy impact.",
+    tech: ["R", "syuzhet", "tm", "tidyverse", "ggplot2"],
+    image: "assets/images/project-5.png",
+    link: "https://github.com/axaysd/Nike-Kaepernick",
+    featured: false
+  },
+  {
+    id: "dogfood-cluster",
+    title: "Cluster Analysis on Dogfood Customers",
+    category: "data-analytics",
+    type: "project",
+    description: "Customer segmentation analysis for dogfood product line.",
+    tech: ["R"],
+    image: "assets/images/project-6.png",
+    link: "https://github.com/axaysd/Cluster-Analysis-on-Dogfood-customers",
+    featured: false
+  },
+  {
+    id: "markov-chain",
+    title: "Markov Chain Simulation: Cost-Effectiveness of Chronic Disease Treatments",
+    category: "data-analytics",
+    type: "project",
+    description: "Markov chain simulation comparing cost-effectiveness of two treatments for chronic diseases.",
+    tech: ["Markov Chains"],
+    image: "assets/images/pharma_markov.png",
+    link: "https://github.com/axaysd/Markov-Chain-Simulation-Comparing-the-cost-effectiveness-of-2-treatments-of-Chronic-diseases",
+    featured: false
+  },
+
+  // ===== PRODUCT MANAGEMENT =====
+  {
+    id: "rapid-painted-door",
+    title: "Rapid Painted Door Test Generator",
+    category: "product-management",
+    type: "project",
+    description: "AI agents for rapid hypothesis validation, persona identification, effective messaging generation, and social targeting.",
+    tech: ["Lindy.AI", "AI Agents"],
+    image: "assets/images/project-18.png",
+    link: "https://youtu.be/yue-gQVgqvY",
+    featured: false
+  },
+  {
+    id: "zerodha-varsity",
+    title: "Zerodha Varsity GTM Plan: Accelerating PLG-Enabled Growth",
+    category: "product-management",
+    type: "deep-dive",
+    description: "Educational app strategy to acquire users for Zerodha investment platform using product-led growth.",
+    tech: ["PMSchool", "GTM Strategy", "PLG"],
+    image: "assets/images/project-C3.png",
+    link: "assets/case-studies/Zerodha Varsity GTM plan - Accelerating Zerodhas PLG enabled Growth via Varsity.pdf",
+    featured: false
+  },
+  {
+    id: "google-maps-navigation",
+    title: "Improve Google Maps Navigation UI for Drivers",
+    category: "product-management",
+    type: "deep-dive",
+    description: "Product improvement analysis for Google Maps navigation screen for car and 2-wheeler drivers.",
+    tech: ["Product Improvement", "UX Analysis"],
+    image: "assets/images/project-C2.png",
+    link: "assets/case-studies/Improving Navigation screen of Google Maps.pdf",
+    featured: false
+  },
+  {
+    id: "finshots-organic-growth",
+    title: "Fixing the Decline in Organic Growth in Finshots App",
+    category: "product-management",
+    type: "deep-dive",
+    description: "Product improvement strategy to reverse declining organic growth for the Finshots app.",
+    tech: ["Product Improvement", "Growth Strategy"],
+    image: "assets/images/project-C1.png",
+    link: "assets/case-studies/Fixing the Decline in Organic Growth in Finshots.pdf",
+    featured: false
+  },
+  {
+    id: "leaflife-revenue",
+    title: "LeafLife Revenue Growth Maximization Case Study",
+    category: "product-management",
+    type: "deep-dive",
+    description: "Product metrics case study: maximizing cumulative revenue, customer count, and CSAT for LeafLife.",
+    tech: ["Product Metrics", "Revenue Strategy"],
+    image: "assets/images/project-C4.png",
+    link: "assets/case-studies/Solution to LeafLife's Revenue Growth Maximization Case Study.pdf",
+    featured: false
+  },
+  {
+    id: "google-maps-improvement",
+    title: "How I'd Improve Google Maps",
+    category: "product-management",
+    type: "project",
+    description: "Product improvement analysis and recommendations for Google Maps.",
+    tech: ["Product Improvement"],
+    image: "assets/images/project-7.png",
+    link: "https://gelatinous-spandex-35a.notion.site/How-I-d-improve-Google-Maps-7a89c605790346f7b82310f03a45b4e4?pvs=4",
+    featured: false
+  },
+  {
+    id: "skillprobe-prd",
+    title: "PRD: SkillProbe.AI - AI Interview Simulation Product",
+    category: "product-management",
+    type: "project",
+    description: "Product requirements document for an AI-powered interview simulation platform.",
+    tech: ["PRD", "Product Strategy"],
+    image: "assets/images/project-8.png",
+    link: "assets/case-studies/SkillProbe.AI_PRD.pdf",
+    featured: false
+  },
+  {
+    id: "kpis-genai",
+    title: "KPIs to Track for GenAI Features/Products",
+    category: "product-management",
+    type: "insight",
+    description: "Framework for tracking key performance indicators for GenAI features and products.",
+    tech: ["Product Analytics", "GenAI"],
+    image: "assets/images/kpi_genai.png",
+    link: "https://gelatinous-spandex-35a.notion.site/KPIs-to-track-for-GenAI-features-c54da0bdb3a4441383b7a08cf89a5f39?pvs=4",
+    featured: false
+  },
+  {
+    id: "ml-pricing",
+    title: "Pricing Strategies for ML Products as a Product Manager",
+    category: "product-management",
+    type: "insight",
+    description: "Notes on developing pricing strategies for AI/ML products.",
+    tech: ["Pricing Strategy", "AI/ML"],
+    image: "assets/images/ml_pricing.png",
+    link: "https://gelatinous-spandex-35a.notion.site/How-to-develop-Pricing-strategies-for-AI-ML-Products-as-an-AI-Product-Manager-54e869a8e6184ebca8df9c918821f089?pvs=4",
+    featured: false
+  },
+  {
+    id: "hooked-learnings",
+    title: "Learnings from Hooked by Nir Eyal (Habit-Forming Products)",
+    category: "product-management",
+    type: "insight",
+    description: "Key takeaways from Hooked - how to build habit-forming products.",
+    tech: ["Product Strategy", "Behavioral Design"],
+    image: "assets/images/feedback_loop.png",
+    link: "https://gelatinous-spandex-35a.notion.site/Hooked-by-Nir-Eyal-How-to-create-habit-forming-Products-fb8497acaac84ec583ae11994a31b17a?pvs=4",
+    featured: false
+  },
+  {
+    id: "pmi-case-study",
+    title: "PMI Let's JAM Case Study Solution",
+    category: "product-management",
+    type: "case-study",
+    description: "Winner of 'Most Practical & Scalable Solution' category. Solution to PMI's performance management case study.",
+    tech: ["OKR", "Performance Management", "Analytics", "Tableau"],
+    image: "assets/images/pmi-ppt.png",
+    link: "https://docs.google.com/presentation/d/13ktdkNC_VeXiOf13JDbF7cXGY6w9yZrk/edit?usp=sharing&ouid=101329279615921623878&rtpof=true&sd=true",
+    featured: false
+  }
+];

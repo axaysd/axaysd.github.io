@@ -61,6 +61,10 @@
         // Check if it's a file we need to redirect
         if (fileRedirects[fileName]) {
             window.location.replace(fileRedirects[fileName]);
+        } else if (fileName.endsWith('.pdf') || fileName.endsWith('.docx')) {
+            // For PDF/doc requests from any subfolder (e.g. /portfolio-v2/resume_aie.pdf),
+            // try the root-level file
+            window.location.replace('/' + fileName);
         } else {
             // For other 404s, redirect to main page
             window.location.replace('./');
