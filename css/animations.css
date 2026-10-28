@@ -1,7 +1,46 @@
-/* Restrained feedback keeps attention on the work. */
+/* Brief, purposeful feedback. All content is visible when motion is unavailable. */
 a, button, summary {
   transition: color .15s ease, background-color .15s ease, border-color .15s ease;
 }
+.btn {
+  transition: color .15s ease, background-color .15s ease, border-color .15s ease, transform .15s ease;
+}
+.btn:active { transform: translateY(1px); }
+.link-arrow { display: inline-block; transition: transform .16s ease; }
+.build-preview img { transition: transform .24s cubic-bezier(.2,.65,.3,1); }
+.build-project:focus-visible .build-preview img { transform: scale(1.025); }
+a:focus-visible .link-arrow { transform: translate(3px, -1px); }
+.nav-links a::after {
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .18s ease;
+}
+.nav-links a[aria-current="location"]::after,
+.nav-links a.active::after,
+.nav-links a:focus-visible::after { transform: scaleX(1); }
+.portrait-outline rect { stroke-dasharray: 1; stroke-dashoffset: 0; }
+
+@media (hover: hover) and (pointer: fine) {
+  .build-project:hover .build-preview img { transform: scale(1.025); }
+  a:hover .link-arrow { transform: translate(3px, -1px); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-intro .hero-text,
+  .hero-intro .hero-avatar { animation: hero-arrive .35s cubic-bezier(.2,.65,.3,1); }
+  .hero-intro .portrait-outline rect { animation: portrait-contour .65s ease-out; }
+}
+@keyframes hero-arrive {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes portrait-contour {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
@@ -9,4 +48,8 @@ a, button, summary {
     transition: none !important;
     scroll-behavior: auto !important;
   }
+  .build-project .build-preview img,
+  .link-arrow,
+  .btn:active { transform: none !important; }
+  .portrait-outline rect { stroke-dashoffset: 0; }
 }

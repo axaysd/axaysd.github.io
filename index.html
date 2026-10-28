@@ -22,9 +22,8 @@
   <meta name="twitter:image" content="https://axaysd.github.io/assets/images/social-preview.jpg">
   <meta name="twitter:image:alt" content="Akshay Danthi, AI Product Manager. AI products for complex enterprise workflows.">
   <link rel="icon" href="assets/images/logo.ico" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/dm-serif-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css?v=a6dc657900">
   <script>
     try {
       var savedTheme = localStorage.getItem('theme');
@@ -32,8 +31,8 @@
         ? savedTheme : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     } catch (error) {}
   </script>
-  <link rel="stylesheet" href="css/style.css?v=e83a9ffb90">
-  <link rel="stylesheet" href="css/animations.css?v=9c88d829db">
+  <link rel="stylesheet" href="css/style.css?v=511323a08f">
+  <link rel="stylesheet" href="css/animations.css?v=11483333a9">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -47,7 +46,7 @@
       "sameAs": ["https://github.com/axaysd", "https://www.linkedin.com/in/axaysd"]
     }
   </script>
-  <script defer src="js/main.js?v=b3440c9ad9"></script>
+  <script defer src="js/main.js?v=ae68af068a"></script>
   <script>
     if (window.location.hostname === 'axaysd.github.io') {
       var analytics = document.createElement('script');
@@ -100,16 +99,16 @@
           <p class="hero-description">I build AI products for complex enterprise workflows.</p>
           <p class="hero-context">Currently at Equifax. Previously at Mastercard.</p>
           <div class="hero-ctas">
-            <a href="#work" class="btn btn-primary">View work ↗</a>
+            <a href="#work" class="btn btn-primary">View work <span class="link-arrow" aria-hidden="true">↗</span></a>
             <a href="Akshay_Danthi_Resume.pdf" class="btn btn-outline" download>Résumé ↓</a>
           </div>
           <div class="hero-socials">
-            <a class="text-link" href="mailto:axaysd@gmail.com">Email ↗</a>
-            <a class="text-link" href="https://www.linkedin.com/in/axaysd" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-            <a class="text-link" href="https://github.com/axaysd" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <a class="text-link" href="mailto:axaysd@gmail.com">Email <span class="link-arrow" aria-hidden="true">↗</span></a>
+            <a class="text-link" href="https://www.linkedin.com/in/axaysd" target="_blank" rel="noopener noreferrer">LinkedIn <span class="link-arrow" aria-hidden="true">↗</span></a>
+            <a class="text-link" href="https://github.com/axaysd" target="_blank" rel="noopener noreferrer">GitHub <span class="link-arrow" aria-hidden="true">↗</span></a>
           </div>
         </div>
-        <div class="hero-avatar"><div class="portrait-frame"><img src="assets/images/avatar-160.webp" srcset="assets/images/avatar-160.webp 160w, assets/images/avatar-320.webp 320w" sizes="(max-width: 360px) 70px, (max-width: 640px) 82px, (max-width: 900px) 140px, 170px" alt="Akshay Danthi" width="160" height="160" fetchpriority="high" decoding="async"></div></div>
+        <div class="hero-avatar"><div class="portrait-frame"><img src="assets/images/avatar-160.webp" srcset="assets/images/avatar-160.webp 160w, assets/images/avatar-320.webp 320w" sizes="(max-width: 640px) 88px, (max-width: 900px) 180px, 220px" alt="Akshay Danthi" width="160" height="160" fetchpriority="high" decoding="async"></div><svg class="portrait-outline" viewBox="0 0 220 220" width="220" height="220" aria-hidden="true" focusable="false"><rect x="1" y="1" width="218" height="218" rx="24" pathLength="1"/></svg></div>
       </div>
     </section>
 
@@ -129,10 +128,10 @@
                   <div><dt>My role</dt><dd>I defined resolution playbooks for 20 case types and evaluation checks for groundedness, privacy, and tool use.</dd></div>
                   <div><dt>Result</dt><dd>Similar-case retrieval enabled guidance for 12% of previously unsupported test cases.</dd></div>
                 </dl>
-                <a class="text-link" href="#speaking">Watch my related talk ↗</a>
+                <a class="text-link" href="#speaking">Watch my related talk <span class="link-arrow" aria-hidden="true">↗</span></a>
               </details>
             </div>
-            <div class="work-result"><span class="result-label">Operating scale</span><strong>30 specialists</strong><span>~3,000 cases per month</span></div>
+            <div class="work-result"><span class="result-label">Operating scale</span><strong><span class="result-value">30</span> <span class="result-unit">specialists</span></strong><span>~3,000 cases per month</span></div>
           </article>
           <article class="work-item">
             <p class="work-company">TheSprintFit</p>
@@ -148,7 +147,7 @@
                 </dl>
               </details>
             </div>
-            <div class="work-result"><span class="result-label">Outcome</span><strong>~70% less time</strong><span>Spent on deal evaluation</span></div>
+            <div class="work-result"><span class="result-label">Outcome</span><strong><span class="result-value">~70%</span> <span class="result-unit">less time</span></strong><span>Spent on deal evaluation</span></div>
           </article>
           <article class="work-item">
             <p class="work-company">SowFin</p>
@@ -164,7 +163,7 @@
                 </dl>
               </details>
             </div>
-            <div class="work-result"><span class="result-label">Outcome</span><strong>40% conversion</strong><span>From interviews to paid pilots</span></div>
+            <div class="work-result"><span class="result-label">Outcome</span><strong><span class="result-value">40%</span> <span class="result-unit">conversion</span></strong><span>From interviews to paid pilots</span></div>
           </article>
           <article class="work-item">
             <p class="work-company">Majorly</p>
@@ -180,7 +179,7 @@
                 </dl>
               </details>
             </div>
-            <div class="work-result"><span class="result-label">Outcome</span><strong>20% growth</strong><span>Weekly active usage in six weeks</span></div>
+            <div class="work-result"><span class="result-label">Outcome</span><strong><span class="result-value">20%</span> <span class="result-unit">growth</span></strong><span>Weekly active usage in six weeks</span></div>
           </article>
         </div>
       </div>
@@ -190,7 +189,7 @@
       <div class="container">
         <article class="talk-card">
           <a class="talk-media" href="https://www.youtube.com/watch?v=m9HJkFvHeRk" target="_blank" rel="noopener noreferrer" aria-label="Watch Beyond RAG: Designing AI Agent Playbooks for Complex Customer Support on YouTube"><img src="https://i.ytimg.com/vi/m9HJkFvHeRk/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="talk-play" aria-hidden="true">▶</span></a>
-          <div class="talk-content"><p class="eyebrow">PyData talk</p><h2 id="talkTitle">Beyond RAG: Designing AI Agent Playbooks for Complex Customer Support</h2><a class="text-link" href="https://www.youtube.com/watch?v=m9HJkFvHeRk" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div>
+          <div class="talk-content"><p class="eyebrow">PyData talk</p><h2 id="talkTitle">Beyond RAG: Designing AI Agent Playbooks for Complex Customer Support</h2><a class="text-link" href="https://www.youtube.com/watch?v=m9HJkFvHeRk" target="_blank" rel="noopener noreferrer">Watch on YouTube <span class="link-arrow" aria-hidden="true">↗</span></a></div>
         </article>
       </div>
     </section>
@@ -200,16 +199,22 @@
         <div class="section-heading"><h2 id="projectsTitle">Projects</h2></div>
         <div class="builds-grid">
           <article class="build-card">
-            <div class="build-preview"><img src="assets/images/project-21-preview.webp" alt="Clinical Intelligence Agent illustration" width="720" height="405" loading="lazy" decoding="async"></div>
-            <div class="build-body"><span class="build-type">Independent prototype</span><h3>Clinical Intelligence Agent</h3><p>Document Q&amp;A with agentic retrieval, safety checks, and evaluation.</p><div class="build-links"><a href="https://github.com/axaysd/clinical-document-intelligence-agent-2" target="_blank" rel="noopener noreferrer" aria-label="View Clinical Intelligence Agent source code on GitHub">View code ↗</a></div></div>
+            <a class="build-project" href="https://github.com/axaysd/clinical-document-intelligence-agent-2" target="_blank" rel="noopener noreferrer" aria-labelledby="buildClinicalTitle">
+              <div class="build-preview"><img src="assets/images/project-21-preview.webp" alt="Clinical Intelligence Agent illustration" width="720" height="405" loading="lazy" decoding="async"></div>
+              <div class="build-body"><span class="build-type">Independent prototype</span><h3 id="buildClinicalTitle">Clinical Intelligence Agent</h3><p>Document Q&amp;A with agentic retrieval, safety checks, and evaluation.</p><div class="build-links"><span class="build-cta">View code <span class="link-arrow" aria-hidden="true">↗</span></span></div></div>
+            </a>
           </article>
           <article class="build-card">
-            <div class="build-preview"><img src="assets/images/project-20-preview.webp" alt="BrowserMate logo and browser illustration" width="720" height="405" loading="lazy" decoding="async"></div>
-            <div class="build-body"><span class="build-type">BrowserOS fork</span><h3>BrowserMate</h3><p>A browser companion that suggests AI actions based on page content.</p><div class="build-links"><a href="https://github.com/axaysd/BrowserMate" target="_blank" rel="noopener noreferrer" aria-label="View BrowserMate source code on GitHub">View code ↗</a></div></div>
+            <a class="build-project" href="https://github.com/axaysd/BrowserMate" target="_blank" rel="noopener noreferrer" aria-labelledby="buildBrowserTitle">
+              <div class="build-preview"><img src="assets/images/project-20-preview.webp" alt="BrowserMate logo and browser illustration" width="720" height="405" loading="lazy" decoding="async"></div>
+              <div class="build-body"><span class="build-type">BrowserOS fork</span><h3 id="buildBrowserTitle">BrowserMate</h3><p>A browser companion that suggests AI actions based on page content.</p><div class="build-links"><span class="build-cta">View code <span class="link-arrow" aria-hidden="true">↗</span></span></div></div>
+            </a>
           </article>
           <article class="build-card">
-            <div class="build-preview"><img src="assets/images/project-19-preview.webp" alt="AI portfolio management illustration" width="720" height="405" loading="lazy" decoding="async"></div>
-            <div class="build-body"><span class="build-type">Independent prototype</span><h3>Agentic Portfolio Management</h3><p>A chat-based prototype for managing model portfolios with AI agents.</p><div class="build-links"><a href="https://github.com/axaysd/model-portfolio-management" target="_blank" rel="noopener noreferrer" aria-label="View Agentic Portfolio Management source code on GitHub">View code ↗</a></div></div>
+            <a class="build-project" href="https://github.com/axaysd/model-portfolio-management" target="_blank" rel="noopener noreferrer" aria-labelledby="buildPortfolioTitle">
+              <div class="build-preview"><img src="assets/images/project-19-preview.webp" alt="AI portfolio management illustration" width="720" height="405" loading="lazy" decoding="async"></div>
+              <div class="build-body"><span class="build-type">Independent prototype</span><h3 id="buildPortfolioTitle">Agentic Portfolio Management</h3><p>A chat-based prototype for managing model portfolios with AI agents.</p><div class="build-links"><span class="build-cta">View code <span class="link-arrow" aria-hidden="true">↗</span></span></div></div>
+            </a>
           </article>
         </div>
         <details class="archive-details" id="archiveDetails"><summary>More projects</summary><p class="archive-intro">Earlier projects, analysis, and writing.</p><div class="filter-bar" id="archiveFilters" role="group" aria-label="Filter project archive" hidden><button class="filter-btn" data-filter="all" aria-pressed="true">All <span class="filter-count"></span></button><button class="filter-btn" data-filter="ai" aria-pressed="false">AI <span class="filter-count"></span></button><button class="filter-btn" data-filter="data-analytics" aria-pressed="false">Data analytics <span class="filter-count"></span></button><button class="filter-btn" data-filter="product-management" aria-pressed="false">Product management <span class="filter-count"></span></button></div><p class="sr-only" id="projectCount" role="status" aria-live="polite"></p><div class="projects-grid" id="projectsGrid">
@@ -521,11 +526,11 @@
           <li class="experience-row"><span class="experience-company">Lloyds Banking Group</span><span class="experience-role">Software Engineer</span><span class="experience-date">Nov 2017 to Nov 2019</span></li>
         </ol>
         <p class="background-note">M.S. Business Analytics, Golden Gate University · B.E. Computer Science, Anna University.</p>
-        <div class="credential-links"><a href="https://www.credly.com/badges/c3c751ba-0c03-4d32-901d-05ad021527a1" target="_blank" rel="noopener noreferrer">Google Cloud Generative AI Leader ↗</a><a href="https://www.productmanagementexercises.com/certificate/36c1e712-e75c-11ee-b6d1-02738a28be1d" target="_blank" rel="noopener noreferrer">Certified AI/ML Product Management ↗</a></div>
+        <div class="credential-links"><a href="https://www.credly.com/badges/c3c751ba-0c03-4d32-901d-05ad021527a1" target="_blank" rel="noopener noreferrer">Google Cloud Generative AI Leader <span class="link-arrow" aria-hidden="true">↗</span></a><a href="https://www.productmanagementexercises.com/certificate/36c1e712-e75c-11ee-b6d1-02738a28be1d" target="_blank" rel="noopener noreferrer">Certified AI/ML Product Management <span class="link-arrow" aria-hidden="true">↗</span></a></div>
       </div>
     </section>
 
-    <section class="section contact" id="contact" aria-labelledby="contactTitle"><div class="container"><div class="contact-layout"><h2 id="contactTitle">Get in touch</h2><div class="contact-actions"><a class="btn btn-primary" href="mailto:axaysd@gmail.com">Email me ↗</a><a class="btn btn-outline" href="https://calendly.com/axaysd" target="_blank" rel="noopener noreferrer">Book a call ↗</a></div></div></div></section>
+    <section class="section contact" id="contact" aria-labelledby="contactTitle"><div class="container"><div class="contact-layout"><h2 id="contactTitle">Get in touch</h2><div class="contact-actions"><a class="btn btn-primary" href="mailto:axaysd@gmail.com">Email me <span class="link-arrow" aria-hidden="true">↗</span></a><a class="btn btn-outline" href="https://calendly.com/axaysd" target="_blank" rel="noopener noreferrer">Book a call <span class="link-arrow" aria-hidden="true">↗</span></a></div></div></div></section>
   </main>
   <footer class="footer"><div class="container footer-inner"><p>Akshay Danthi</p><a class="back-to-top" id="backToTop" href="#hero">Back to top ↑</a></div></footer>
 </body>

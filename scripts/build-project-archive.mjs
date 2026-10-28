@@ -35,7 +35,7 @@ const before = readFileSync(indexPath, 'utf8');
 const marker = /<!-- PROJECT_ARCHIVE_START -->[\s\S]*?<!-- PROJECT_ARCHIVE_END -->/;
 if (!marker.test(before)) throw new Error('Project archive markers are missing from index.html.');
 let after = before.replace(marker, `<!-- PROJECT_ARCHIVE_START -->\n${cards}\n          <!-- PROJECT_ARCHIVE_END -->`);
-for (const asset of ['css/style.css', 'css/animations.css', 'js/main.js']) {
+for (const asset of ['css/fonts.css', 'css/style.css', 'css/animations.css', 'js/main.js']) {
   const version = createHash('sha256').update(readFileSync(resolve(root, asset))).digest('hex').slice(0, 10);
   const reference = new RegExp(`((?:href|src)="${asset.replaceAll('.', '[.]')})(?:[?]v=[a-z0-9]+)?"`, 'g');
   after = after.replace(reference, `$1?v=${version}"`);

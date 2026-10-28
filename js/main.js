@@ -7,6 +7,21 @@
   const themeToggle = document.getElementById('themeToggle');
   const darkPreference = window.matchMedia('(prefers-color-scheme: dark)');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  // Enable the brief entrance once, then return to the fully static base styles.
+  const hero = document.getElementById('hero');
+  let introTimer = null;
+  function finishHeroIntro() {
+    if (hero) hero.classList.remove('hero-intro');
+    if (introTimer !== null) { window.clearTimeout(introTimer); introTimer = null; }
+  }
+  if (hero && !reducedMotion.matches) {
+    hero.classList.add('hero-intro');
+    introTimer = window.setTimeout(finishHeroIntro, 700);
+  }
+  reducedMotion.addEventListener('change', function (event) {
+    if (event.matches) finishHeroIntro();
+  });
   let explicitTheme = null;
   try {
     const saved = localStorage.getItem('theme');

@@ -31,3 +31,7 @@ Theme selection, mobile navigation, and archive filters are progressive enhancem
 - Active section navigation, case notes, keyboard navigation, and archive filters preserve a short default page.
 - Umami loads only on the public domain. Local previews do not send pageviews or click events.
 - Public-site events measure resume, talk, project, contact, and case detail interactions. Contact clicks do not measure completed conversations or bookings.
+
+- Display and body fonts are hosted locally in `assets/fonts/`, with their license notices.
+- Hero entrance and portrait outline animations run once; hover/focus effects stay brief and respect reduced motion.
+- Each featured project is a single keyboard-accessible link covering its artwork, title, and action.
