@@ -154,6 +154,10 @@ svg { flex-shrink: 0; vertical-align: middle; }
 .talk-content .eyebrow { color: #b8cbff; margin-bottom: 11px; }
 .talk-content h2 { max-width: 650px; color: #f4f7ff; font-size: 27px; font-weight: 550; line-height: 1.35; letter-spacing: -.035em; }
 .talk-content .text-link { min-height: 44px; margin-top: 13px; color: #fff; }
+.talk-event { font-size: 13px; letter-spacing: .08em; }
+.talk-event-meta { margin-top: 12px; color: #c9d5e8; font-size: 14px; line-height: 1.6; }
+.talk-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 24px; margin-top: 10px; }
+.talk-actions .text-link { margin-top: 0; }
 .talk-card :focus-visible { outline-color: #c7d5ff; }
 [data-theme="dark"] .talk-card { background: linear-gradient(115deg,#233e64,#192d4a); }
 

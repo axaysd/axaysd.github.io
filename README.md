@@ -35,3 +35,5 @@ Theme selection, mobile navigation, and archive filters are progressive enhancem
 - Display and body fonts are hosted locally in `assets/fonts/`, with their license notices.
 - Hero entrance and portrait outline animations run once; hover/focus effects stay brief and respect reduced motion.
 - Each featured project is a single keyboard-accessible link covering its artwork, title, and action.
+
+The speaking section credits ACM Infonoms 2026 (October 24, 2026) as the event. PyData published the YouTube recording. Event source: https://stl.acm.org/infonoms/.
