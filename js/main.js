@@ -84,7 +84,16 @@
       focusFirst(mobileMenu);
     });
     mobileMenu.querySelectorAll('a[href]').forEach(function (link) {
-      link.addEventListener('click', function () { closeMenu(false); });
+      link.addEventListener('click', function () {
+        closeMenu(!link.hash);
+        if (!link.hash) return;
+        const section = document.getElementById(link.hash.slice(1));
+        const heading = section && section.querySelector('h1, h2');
+        if (heading) {
+          heading.setAttribute('tabindex', '-1');
+          requestAnimationFrame(function () { heading.focus({ preventScroll: true }); });
+        }
+      });
     });
     desktopViewport.addEventListener('change', function (event) {
       if (event.matches) closeMenu(false);
@@ -114,14 +123,28 @@
   });
 
   const navbar = document.getElementById('navbar');
-  const scrollProgress = document.getElementById('scrollProgress');
+  const navigationLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"], .mobile-nav-links a[href^="#"]'));
+  const navigationSections = Array.from(document.querySelectorAll('main section[id]')).filter(function (section) {
+    return navigationLinks.some(function (link) { return link.hash === '#' + section.id; });
+  });
+  let currentSection = null;
   let scrollFramePending = false;
   function updateScroll() {
     if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 24);
-    if (scrollProgress) {
-      const range = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = range > 0 ? Math.min(100, Math.max(0, window.scrollY / range * 100)) : 0;
-      scrollProgress.style.width = progress + '%';
+    const readingLine = (navbar ? navbar.getBoundingClientRect().height : 76) + 32;
+    let nextSection = null;
+    navigationSections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= readingLine) nextSection = section.id;
+    });
+    if (window.scrollY > 0 && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) {
+      nextSection = navigationSections.length ? navigationSections[navigationSections.length - 1].id : null;
+    }
+    if (nextSection !== currentSection) {
+      navigationLinks.forEach(function (link) {
+        if (link.hash === '#' + nextSection) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+      currentSection = nextSection;
     }
     scrollFramePending = false;
   }
@@ -130,6 +153,14 @@
   }
   window.addEventListener('scroll', scheduleScrollUpdate, { passive: true });
   window.addEventListener('resize', scheduleScrollUpdate, { passive: true });
+  window.addEventListener('load', scheduleScrollUpdate);
+  window.addEventListener('hashchange', scheduleScrollUpdate);
+  if ('ResizeObserver' in window) {
+    const layoutObserver = new ResizeObserver(scheduleScrollUpdate);
+    const main = document.querySelector('main');
+    if (main) layoutObserver.observe(main);
+    if (navbar) layoutObserver.observe(navbar);
+  }
   updateScroll();
   const backToTop = document.getElementById('backToTop');
   if (backToTop) {
@@ -177,7 +208,44 @@
     archiveFilters.hidden = false;
     filterProjects('all');
   }
-  const archiveDetails = document.getElementById('archiveDetails');
-  if (archiveDetails) archiveDetails.addEventListener('toggle', scheduleScrollUpdate);
+  // Custom events use the existing tracker only on the public site.
+  function trackEvent(name, data) {
+    if (window.location.origin !== 'https://axaysd.github.io' || !window.umami || typeof window.umami.track !== 'function') return;
+    try { window.umami.track(name, data); } catch (error) { /* Navigation still works if analytics is unavailable. */ }
+  }
+  function linkPlacement(link) {
+    const section = link.closest('section[id]');
+    if (section) return section.id;
+    return link.closest('.mobile-menu') ? 'mobile-navigation' : 'navigation';
+  }
+  document.addEventListener('click', function (event) {
+    const link = event.target.closest && event.target.closest('a[href]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    const placement = linkPlacement(link);
+    if (/\.pdf(?:[?#]|$)/i.test(href) && link.hasAttribute('download')) {
+      trackEvent('resume_download', { section: placement, name: 'Resume' });
+    } else if (/^mailto:/i.test(href)) {
+      trackEvent('contact_click', { section: placement, name: 'Email' });
+    } else if (/^https:\/\/calendly\.com\//i.test(href)) {
+      trackEvent('contact_click', { section: placement, name: 'Book a call' });
+    } else if (placement === 'speaking' && /^https:\/\/(?:www\.)?(?:youtube\.com|youtu\.be)\//i.test(href)) {
+      trackEvent('talk_click', { section: placement, name: 'Beyond RAG' });
+    } else if (placement === 'projects' && /^https?:\/\//i.test(href)) {
+      const card = link.closest('article');
+      const title = card && card.querySelector('h3');
+      trackEvent('project_click', { section: placement, name: title ? title.textContent.trim() : 'Project' });
+    }
+  });
+  document.querySelectorAll('details').forEach(function (details) {
+    details.addEventListener('toggle', function () {
+      scheduleScrollUpdate();
+      if (details.open && details.classList.contains('work-details')) {
+        const article = details.closest('article');
+        const heading = article && article.querySelector('h3');
+        trackEvent('case_open', { section: 'work', name: heading ? heading.textContent.trim() : 'Work' });
+      }
+    });
+  });
 
 })();

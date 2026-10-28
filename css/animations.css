@@ -1,4 +1,4 @@
-/* Quiet interaction feedback, with no entrance or looping effects. */
+/* Restrained feedback keeps attention on the work. */
 a, button, summary {
   transition: color .15s ease, background-color .15s ease, border-color .15s ease;
 }
